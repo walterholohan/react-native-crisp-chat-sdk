@@ -45,6 +45,19 @@ Start using Crisp by adding the following code on your AppDelegate :
 [[CrispMain alloc] initializeWithWebsiteId:@"YOUR_WEBSITE_ID"];
 ```
 
+#### Additional Steps
+
+This library was written in Swift, so in-order for you app to compile, you need to have at least on .swift file in your source code a bridging header to avoid a runtime error like so:
+
+![swift error](./swift-error.png)
+
+All you have to do is:
+
+- File > New > File
+- Swift File
+- Name the file whatever you wish
+- When prompted to create a bridging header, do so
+
 ### Android
 
 Initialize the library in your [Application subclass] (MainApplication.java)
