@@ -2,7 +2,7 @@
 
 React-Native bridge for Crisp chat iOS and Android SDK&#39;s
 
-![image](https://user-images.githubusercontent.com/5293650/81501679-94c54d80-92d1-11ea-8ff8-53a429be1cbb.png)
+<img width="300" alt="portfolio_view" src="https://user-images.githubusercontent.com/5293650/81501679-94c54d80-92d1-11ea-8ff8-53a429be1cbb.png">
 
 ## Features
 
