@@ -1,9 +1,12 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, requireNativeComponent, ViewStyle } from 'react-native';
 
 type CrispChatSdkType = {
-  multiply(a: number, b: number): Promise<number>;
+  setEmail(email: string): () => void;
 };
 
 const { CrispChatSdk } = NativeModules;
+export const CrispChatUI = requireNativeComponent(
+  'CrispView'
+) as React.ComponentClass<{ style: ViewStyle }, {}>;
 
-export default CrispChatSdk as CrispChatSdkType;
+export const CrispChatSDK = CrispChatSdk as CrispChatSdkType;

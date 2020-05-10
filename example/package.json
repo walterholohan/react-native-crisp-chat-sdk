@@ -4,6 +4,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "clean": "watchman watch-del-all && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && rm -rf node_modules/ && rm -rf ios/build && rm -rf ios/pods && rm -rf android/build && yarn build",
+    "build": "yarn && cd ios && pod install",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start"

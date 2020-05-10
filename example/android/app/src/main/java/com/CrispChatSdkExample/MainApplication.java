@@ -13,6 +13,8 @@ import java.util.List;
 
 import com.reactnativecrispchatsdk.CrispChatSdkPackage;
 
+import im.crisp.sdk.Crisp;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -49,6 +51,8 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager()); // Remove this line if you don't want Flipper enabled
+    Crisp.initialize(this);
+    Crisp.getInstance().setWebsiteId("7342dabc-15ef-4020-b93a-6cfc0fe6d2b8");
   }
 
   /**

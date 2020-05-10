@@ -14,8 +14,11 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/walterholohan/react-native-crisp-chat-sdk.git", :tag => "#{s.version}" }
 
   
-  s.source_files = "ios/**/*.{h,m,mm}"
+  s.source_files = "ios/**/*.{h,m,mm,swift}"
   
 
   s.dependency "React"
+
+  # Crisp dependency
+  s.dependency "Crisp"
 end

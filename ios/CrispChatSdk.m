@@ -1,19 +1,18 @@
-#import "CrispChatSdk.h"
+//
+//  CrispViewManager.m
+//  CrispChatSdk
+//
+//  Created by Walter Holohan on 09/05/2020.
+//  Copyright © 2020 Facebook. All rights reserved.
+//
 
-@implementation CrispChatSdk
+#import <Foundation/Foundation.h>
+#import "React/RCTViewManager.h"
+#import "React/RCTBridgeModule.h"
 
-RCT_EXPORT_MODULE()
+@interface RCT_EXTERN_MODULE(CrispViewManager, RCTViewManager)
+@end
 
-// Example method
-// See // https://facebook.github.io/react-native/docs/native-modules-ios
-RCT_REMAP_METHOD(multiply,
-                 multiplyWithA:(nonnull NSNumber*)a withB:(nonnull NSNumber*)b
-                 withResolver:(RCTPromiseResolveBlock)resolve
-                 withRejecter:(RCTPromiseRejectBlock)reject)
-{
-  NSNumber *result = @([a floatValue] * [b floatValue]);
-
-  resolve(result);
-}
-
+@interface RCT_EXTERN_MODULE(CrispChatSdk, NSObject)
+RCT_EXTERN_METHOD(setEmail:(NSString *)email)
 @end

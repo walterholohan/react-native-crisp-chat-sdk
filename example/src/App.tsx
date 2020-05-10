@@ -1,17 +1,20 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import CrispChatSdk from 'react-native-crisp-chat-sdk';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { CrispChatSDK, CrispChatUI } from 'react-native-crisp-chat-sdk';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [showChat, setShowChat] = React.useState<boolean>();
 
   React.useEffect(() => {
-    CrispChatSdk.multiply(3, 7).then(setResult);
+    CrispChatSDK.setEmail('test@test.com');
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <TouchableOpacity onPress={() => setShowChat(true)}>
+        <Text>Show Chat</Text>
+      </TouchableOpacity>
+      {showChat && <CrispChatUI style={{ flex: 1, width: '100%' }} />}
     </View>
   );
 }
