@@ -52,7 +52,9 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager()); // Remove this line if you don't want Flipper enabled
     Crisp.initialize(this);
-    Crisp.getInstance().setWebsiteId("7342dabc-15ef-4020-b93a-6cfc0fe6d2b8");
+    // Replace it with your WEBSITE_ID
+    // Retrieve it using https://app.crisp.chat/website/[YOUR_WEBSITE_ID]/
+    Crisp.getInstance().setWebsiteId("7598bf86-9ebb-46bc-8c61-be8929bbf93d");
   }
 
   /**
