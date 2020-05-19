@@ -6,7 +6,7 @@ export default function App() {
   const [showChat, setShowChat] = React.useState<boolean>();
 
   React.useEffect(() => {
-    CrispChatSDK.setEmail('test@test.com');
+    CrispChatSDK.setUserEmail('test@test.com');
   }, []);
 
   return (

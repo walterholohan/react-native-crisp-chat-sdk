@@ -13,8 +13,41 @@ import Crisp
 class CrispChatSdk: NSObject {
     
     @objc
-    func setEmail(_ email: String) {
+    func setTokenId(_ id: String) {
+        Crisp.tokenId = id
+    }
+    
+    @objc
+    func setLocale(_ locale: String) {
+        Crisp.locale = locale
+    }
+    
+    @objc
+    func setUserEmail(_ email: String) {
         Crisp.user.set(email: email)
+    }
+    
+    @objc
+    func setUserNickname(_ nickname: String) {
+        Crisp.user.set(nickname: nickname)
+    }
+    @objc
+    func setUserPhone(_ phone: String) {
+        Crisp.user.set(phone: phone)
+    }
+    
+    @objc
+    func setUserAvatar(_ url: String) {
+        Crisp.user.set(avatar: url)
+    }
+    @objc
+    func setSessionSegment(_ segment: String) {
+        Crisp.session.set(segment: segment)
+    }
+    
+    @objc
+    func resetSession() {
+        Crisp.session.reset()
     }
     
     @objc

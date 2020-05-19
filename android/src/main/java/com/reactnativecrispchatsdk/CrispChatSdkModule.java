@@ -17,8 +17,33 @@ public class CrispChatSdkModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void setEmail(String email) {
+  public void setUserEmail(String email) {
     Crisp.User.setEmail(email);
+  }
+
+  @ReactMethod
+  public void setUserNickname(String name) {
+    Crisp.User.setNickname(name);
+  }
+
+  @ReactMethod
+  public void setUserPhone(String phone) {
+    Crisp.User.setPhone(phone);
+  }
+
+  @ReactMethod
+  public void setUserAvatar(String url) {
+    Crisp.User.setAvatar(url);
+  }
+
+  @ReactMethod
+  public void setSessionSegment(String segment) {
+    Crisp.Session.setSegments(segment);
+  }
+
+  @ReactMethod
+  public void resetSession() {
+    Crisp.Session.reset();
   }
 
   @Override

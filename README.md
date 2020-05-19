@@ -99,13 +99,20 @@ import { CrispChatSDK, CrispChatUI } from 'react-native-crisp-chat-sdk';
 
 // ...
 
-CrispChatSDK.setEmail('test@test.com')
+CrispChatSDK.setUserEmail('test@test.com')
 
 <CrispChatUI style={{ flex: 1, width: '100%' }} />
 ```
 
 ## Availables APIs:
-* `CrispChatSDK.setEmail('test@test.com')`
+* `CrispChatSDK.setTokenId('XXXX')` (iOS only)
+* `CrispChatSDK.setLocale('it')` (iOS only)
+* `CrispChatSDK.setUserEmail('test@test.com')`
+* `CrispChatSDK.setUserNickname('John Doe')`
+* `CrispChatSDK.setUserPhone('003370123456789')`
+* `CrispChatSDK.setUserAvatar('https://pbs.twimg.com/profile_images/782474226020200448/zDo-gAo0_400x400.jpg')`
+* `CrispChatSDK.setSessionSegment('segment')`
+* `CrispChatSDK.resetSession()`
 
 ## Contributing
 
