@@ -47,7 +47,7 @@ Start using Crisp by adding the following code on your AppDelegate :
 
 #### Additional Steps
 
-This library was written in Swift, so in-order for you app to compile, you need to have at least on .swift file in your source code a bridging header to avoid a runtime error like so:
+This library was written in Swift, so in-order for you app to compile, you need to have at least one .swift file in your source code a bridging header to avoid a runtime error like so:
 
 ![swift error](./swift-error.png)
 
