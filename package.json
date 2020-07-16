@@ -119,6 +119,9 @@
       }
     }
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "@react-native-community/bob": {
     "source": "src",
     "output": "lib",
