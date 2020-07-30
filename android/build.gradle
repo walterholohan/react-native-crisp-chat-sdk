@@ -5,6 +5,7 @@ buildscript {
   repositories {
     google()
     jcenter()
+    maven { url "https://jitpack.io" }
   }
 
   dependencies {
@@ -33,9 +34,9 @@ android {
     targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
     versionCode 1
     versionName "1.0"
-    
+
   }
-  
+
   buildTypes {
     release {
       minifyEnabled false
@@ -54,6 +55,7 @@ repositories {
   mavenCentral()
   jcenter()
   google()
+  maven { url "https://jitpack.io" }
 
   def found = false
   def defaultDir = null
@@ -127,5 +129,6 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  compile 'im.crisp:crisp-sdk:0.1.14'
+  compile "com.github.2BWorks:crisp-sdk-android:master-SNAPSHOT"
+
 }
