@@ -3,8 +3,6 @@ package com.reactnativecrispchatsdk;
 import android.content.Context;
 import android.widget.LinearLayout;
 
-package id.moxspoy.chatme.ui.dashboard;
-
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import id.moxspoy.chatme.R;
+import com.reactnativecrispchatsdk.R;
 import im.crisp.sdk.ui.CrispFragment;
 
 public class CrispChatView extends LinearLayout {
