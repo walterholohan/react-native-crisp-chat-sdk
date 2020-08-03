@@ -4,9 +4,10 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="horizontal">
-  <FrameLayout
-    android:id="@+id/fl_crisp_container"
+  <fragment
+    android:name="im.crisp.sdk.ui.CrispFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    android:layout_margin="0dp" />
 </LinearLayout>
 
