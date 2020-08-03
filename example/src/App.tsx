@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { CrispChatSDK, CrispChatUI } from 'react-native-crisp-chat-sdk';
 
 export default function App() {
-  const [showChat, setShowChat] = React.useState<boolean>();
+  const [showChat, setShowChat] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     CrispChatSDK.setUserEmail('test@test.com');
@@ -12,8 +12,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setShowChat(true)}>
-        <Text>Show Chat</Text>
+      <TouchableOpacity onPress={() => setShowChat(!showChat)}>
+        <Text>{showChat ? 'Hide' : 'Show'} Chat</Text>
       </TouchableOpacity>
       {showChat && <CrispChatUI style={{ flex: 1, width: '100%' }} />}
     </View>

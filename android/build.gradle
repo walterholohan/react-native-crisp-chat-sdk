@@ -5,7 +5,7 @@ buildscript {
   repositories {
     google()
     jcenter()
-    maven { url "https://jitpack.io" }
+    maven { url "https://www.jitpack.io" }
   }
 
   dependencies {
@@ -55,7 +55,7 @@ repositories {
   mavenCentral()
   jcenter()
   google()
-  maven { url "https://jitpack.io" }
+  maven { url "https://www.jitpack.io" }
 
   def found = false
   def defaultDir = null
