@@ -13,41 +13,49 @@ import Crisp
 class CrispChatSdk: NSObject {
     
     @objc
-    func setTokenId(_ id: String) {
-        Crisp.tokenId = id
+    func show() {
+        DispatchQueue.main.async {
+            UIApplication.shared.windows.first?.rootViewController?.present(ChatViewController(), animated: true)
+        }
     }
     
     @objc
-    func setLocale(_ locale: String) {
-        Crisp.locale = locale
+    func setTokenId(_ id: String) {
+        CrispSDK.setTokenID(tokenID: id)
     }
     
     @objc
     func setUserEmail(_ email: String) {
-        Crisp.user.set(email: email)
+        CrispSDK.user.email = email
     }
     
     @objc
     func setUserNickname(_ nickname: String) {
-        Crisp.user.set(nickname: nickname)
+        CrispSDK.user.nickname = nickname
     }
     @objc
     func setUserPhone(_ phone: String) {
-        Crisp.user.set(phone: phone)
+        CrispSDK.user.phone = phone
     }
-    
+
     @objc
     func setUserAvatar(_ url: String) {
-        Crisp.user.set(avatar: url)
-    }
-    @objc
-    func setSessionSegment(_ segment: String) {
-        Crisp.session.set(segment: segment)
+        CrispSDK.user.avatar = URL(string: url)
     }
     
     @objc
+    func setSessionSegment(_ segment: String) {
+        CrispSDK.session.segment = segment
+    }
+    
+    @objc
+    func pushSessionEvent(_ name: String, _ color: Crisp.SessionEventColor) {
+        CrispSDK.session.pushEvent(SessionEvent(name: name, color: color))
+    }
+
+    @objc
     func resetSession() {
-        Crisp.session.reset()
+        CrispSDK.session.reset()
     }
     
     @objc
