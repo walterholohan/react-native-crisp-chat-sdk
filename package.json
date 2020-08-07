@@ -22,8 +22,7 @@
     "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "node -e \"process.exit(require('os').platform() !== 'darwin')\" && test -d example/ios && cd example/ios && pod install || printf ''",
-    "bootstrap": "yarn example && yarn && yarn pods",
-    "version": "auto-changelog -p && git add CHANGELOG.md"
+    "bootstrap": "yarn example && yarn && yarn pods"
   },
   "keywords": [
     "react-native",
@@ -84,7 +83,11 @@
   "release-it": {
     "git": {
       "commitMessage": "chore: release ${version}",
-      "tagName": "v${version}"
+      "tagName": "v${version}",
+      "changelog": "npx auto-changelog --stdout --commit-limit false --unreleased --template https://raw.githubusercontent.com/release-it/release-it/master/templates/changelog-compact.hbs"
+    },
+    "hooks": {
+      "after:bump": "npx auto-changelog -p"
     },
     "npm": {
       "publish": true
