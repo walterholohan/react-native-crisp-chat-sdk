@@ -29,7 +29,8 @@ static void InitializeFlipper(UIApplication *application) {
 }
 #endif
 
-@import Crisp;
+#import <Crisp/Crisp.h>
+
 
 @implementation AppDelegate
 
@@ -51,7 +52,7 @@ static void InitializeFlipper(UIApplication *application) {
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
 
-  [[CrispMain alloc] initializeWithWebsiteId:@"YOUR_WEBSITE_ID"];
+  [CrispSDK configureWithWebsiteID:@"YOUR_WEBSITE_ID"];
   
   return YES;
 }

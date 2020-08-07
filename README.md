@@ -2,7 +2,7 @@
 
 React-Native bridge for Crisp chat iOS and Android SDK&#39;s
 
-<img width="300" alt="portfolio_view" src="https://user-images.githubusercontent.com/5293650/81501679-94c54d80-92d1-11ea-8ff8-53a429be1cbb.png">
+![crisp screenshot](./screenshot.png)
 
 ## Features
 
@@ -40,10 +40,15 @@ For versions below 0.60.0, use rnpm links
 Start using Crisp by adding the following code on your AppDelegate :
 
 ```objective-c
-@import Crisp;
+#import <Crisp/Crisp.h>
 
-[[CrispMain alloc] initializeWithWebsiteId:@"YOUR_WEBSITE_ID"];
+[CrispSDK configureWithWebsiteID:@"YOUR_WEBSITE_ID"];
 ```
+
+#### Update your Info.plist
+
+To enable your users to take and upload photos to the chat as well as download photos to their photo library, add the
+`Privacy - Camera Usage Description` ([NSCameraUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nscamerausagedescription)) and `Privacy - Photo Library Additions Usage Description` ([NSPhotoLibraryAddUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsphotolibraryaddusagedescription)) to your app's Info.plist.
 
 #### Additional Steps
 
@@ -73,7 +78,7 @@ public class MainApplication extends Application implements ReactApplication {
         Crisp.initialize(this);
         // Replace it with your WEBSITE_ID
         // Retrieve it using https://app.crisp.chat/website/[YOUR_WEBSITE_ID]/
-        Crisp.getInstance().setWebsiteId("7598bf86-9ebb-46bc-8c61-be8929bbf93d");
+        Crisp.getInstance().setWebsiteId("YOUR_WEBSITE_ID");
     }
 }
 ```
@@ -94,6 +99,9 @@ Crisp Website ID is an UUID like e30a04ee-f81c-4935-b8d8-5fa55831b1c0
 
 You can view the [example project](./example/src/App.tsx) for more usage.
 
+BREAKING CHANGE in version 0.2.0
+To display the crisp chat view in iOS you now have to call `CrispChatSDK.show()`. This will render the view as a ios native modal. 
+
 ```js
 import { CrispChatSDK, CrispChatUI } from 'react-native-crisp-chat-sdk';
 
@@ -101,12 +109,17 @@ import { CrispChatSDK, CrispChatUI } from 'react-native-crisp-chat-sdk';
 
 CrispChatSDK.setUserEmail('test@test.com')
 
-<CrispChatUI style={{ flex: 1, width: '100%' }} />
+if (Platform.OS === "ios") {
+  CrispChatSDK.show()
+} else {
+  const renderCrispChat = () => <CrispChatUI style={{ flex: 1, width: '100%' }} />
+}
 ```
 
 ## Availables APIs:
+* `CrispChatSDK.show()` (iOS only)
 * `CrispChatSDK.setTokenId('XXXX')` (iOS only)
-* `CrispChatSDK.setLocale('it')` (iOS only)
+* `CrispChatSDK.pushSessionEvent(name: "Signup", color: CrispSessionEventColors.blue)` (iOS only)
 * `CrispChatSDK.setUserEmail('test@test.com')`
 * `CrispChatSDK.setUserNickname('John Doe')`
 * `CrispChatSDK.setUserPhone('003370123456789')`
