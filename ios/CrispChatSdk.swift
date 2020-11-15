@@ -48,4 +48,10 @@ class CrispChatSdk: NSObject {
             UIApplication.shared.windows.first?.rootViewController?.present(ChatViewController(), animated: true)
         }
     }
+
+    @objc
+    static func requiresMainQueueSetup() -> Bool {
+        return true
+    }
+
 }
