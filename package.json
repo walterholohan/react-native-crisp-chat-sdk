@@ -2,26 +2,31 @@
   "name": "react-native-crisp-chat-sdk",
   "version": "0.2.1",
   "description": "React-Native bridge for Crisp chat iOS and Android SDK&#39;s",
-  "main": "lib/commonjs/index.js",
-  "module": "lib/module/index.js",
+  "main": "lib/commonjs/index",
+  "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",
-  "react-native": "src/index.tsx",
-  "source": "src/index.tsx",
+  "react-native": "src/index",
+  "source": "src/index",
   "files": [
     "src",
     "lib",
     "android",
     "ios",
-    "react-native-crisp-chat-sdk.podspec"
+    "cpp",
+    "react-native-crisp-chat-sdk.podspec",
+    "!lib/typescript/example",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__"
   ],
   "scripts": {
     "test": "jest",
     "typescript": "tsc --noEmit",
-    "lint": "eslint --ext .js,.ts,.tsx .",
+    "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
-    "pods": "node -e \"process.exit(require('os').platform() !== 'darwin')\" && test -d example/ios && cd example/ios && pod install || printf ''",
+    "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods"
   },
   "keywords": [
@@ -53,8 +58,8 @@
     "jest": "^26.0.1",
     "pod-install": "^0.1.0",
     "prettier": "^2.0.5",
-    "react": "16.13.1",
-    "react-native": "0.63.2",
+    "react": "16.11.0",
+    "react-native": "0.62.2",
     "release-it": "^13.5.8",
     "typescript": "^3.8.3"
   },
@@ -119,10 +124,7 @@
       ]
     }
   },
-  "eslintIgnore": [
-    "node_modules/",
-    "lib/"
-  ],
+  "eslintIgnore": ["node_modules/", "lib/"],
   "prettier": {
     "quoteProps": "consistent",
     "singleQuote": true,
@@ -133,13 +135,6 @@
   "@react-native-community/bob": {
     "source": "src",
     "output": "lib",
-    "targets": [
-      "commonjs",
-      "module",
-      "typescript"
-    ]
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "targets": ["commonjs", "module", "typescript"]
   }
 }

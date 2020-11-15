@@ -13,7 +13,7 @@ import java.util.List;
 
 import com.reactnativecrispchatsdk.CrispChatSdkPackage;
 
-import im.crisp.sdk.Crisp;
+import im.crisp.client.Crisp;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -51,10 +51,10 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager()); // Remove this line if you don't want Flipper enabled
-    Crisp.initialize(this);
+
     // Replace it with your WEBSITE_ID
     // Retrieve it using https://app.crisp.chat/website/[YOUR_WEBSITE_ID]/
-    Crisp.getInstance().setWebsiteId("YOUR_WEBSITE_ID");
+    Crisp.configure("YOUR_WEBSITE_ID");
   }
 
   /**

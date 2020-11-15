@@ -65,9 +65,16 @@ All you have to do is:
 
 ### Android
 
-Initialize the library in your [Application subclass] (MainApplication.java)
+Add the Crisp SDK in your dependencies in `app/build.gradle`:
+
+```groovy
+implementation 'im.crisp:crisp-sdk:1.0.0beta0'
+```
+
+Initialize the library in your [Application subclass](MainApplication.java)
+
 ```java
-import im.crisp.sdk.Crisp;
+import im.crisp.client.Crisp;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -75,17 +82,16 @@ public class MainApplication extends Application implements ReactApplication {
     public void onCreate() {
         super.onCreate();
 
-        Crisp.initialize(this);
         // Replace it with your WEBSITE_ID
         // Retrieve it using https://app.crisp.chat/website/[YOUR_WEBSITE_ID]/
-        Crisp.getInstance().setWebsiteId("YOUR_WEBSITE_ID");
+        Crisp.configure("YOUR_WEBSITE_ID");
     }
 }
 ```
 
 ## Requirements
 
-⚠️ Adding Camera and Photo permissions is mandatory, `NSCameraUsageDescription` and `NSPhotoLibraryUsageDescription` in  `Info.plist`, to inform your users that you need to access to the Camera and Photo Library. You also have to enable **"iCloud Documents"** capability
+⚠️ Adding Camera and Photo permissions is mandatory, `NSCameraUsageDescription` and `NSPhotoLibraryUsageDescription` in `Info.plist`, to inform your users that you need to access to the Camera and Photo Library. You also have to enable **"iCloud Documents"** capability
 
 ## Get your website ID
 
@@ -99,33 +105,30 @@ Crisp Website ID is an UUID like e30a04ee-f81c-4935-b8d8-5fa55831b1c0
 
 You can view the [example project](./example/src/App.tsx) for more usage.
 
-BREAKING CHANGE in version 0.2.0
-To display the crisp chat view in iOS you now have to call `CrispChatSDK.show()`. This will render the view as a ios native modal. 
-
 ```js
-import { CrispChatSDK, CrispChatUI } from 'react-native-crisp-chat-sdk';
+import CrispChat, { setUserEmail } from 'react-native-crisp-chat-sdk';
 
 // ...
+export default function App() {
+  setUserEmail('test@test.com');
 
-CrispChatSDK.setUserEmail('test@test.com')
-
-if (Platform.OS === "ios") {
-  CrispChatSDK.show()
-} else {
-  const renderCrispChat = () => <CrispChatUI style={{ flex: 1, width: '100%' }} />
+  return (
+    <CrispChat />;
+  )
 }
 ```
 
 ## Availables APIs:
-* `CrispChatSDK.show()` (iOS only)
-* `CrispChatSDK.setTokenId('XXXX')` (iOS only)
-* `CrispChatSDK.pushSessionEvent(name: "Signup", color: CrispSessionEventColors.blue)` (iOS only)
-* `CrispChatSDK.setUserEmail('test@test.com')`
-* `CrispChatSDK.setUserNickname('John Doe')`
-* `CrispChatSDK.setUserPhone('003370123456789')`
-* `CrispChatSDK.setUserAvatar('https://pbs.twimg.com/profile_images/782474226020200448/zDo-gAo0_400x400.jpg')`
-* `CrispChatSDK.setSessionSegment('segment')`
-* `CrispChatSDK.resetSession()`
+
+- `CrispChatSDK.show()`
+- `CrispChatSDK.setTokenId('XXXX')` (iOS only)
+- `CrispChatSDK.pushSessionEvent(name: "Signup", color: CrispSessionEventColors.blue)` (iOS only)
+- `CrispChatSDK.setUserEmail('test@test.com')` (iOS only)
+- `CrispChatSDK.setUserNickname('John Doe')` (iOS only)
+- `CrispChatSDK.setUserPhone('003370123456789')` (iOS only)
+- `CrispChatSDK.setUserAvatar('https://pbs.twimg.com/profile_images/782474226020200448/zDo-gAo0_400x400.jpg')` (iOS only)
+- `CrispChatSDK.setSessionSegment('segment')` (iOS only)
+- `CrispChatSDK.resetSession()` (iOS only)
 
 ## Contributing
 
