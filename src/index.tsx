@@ -1,4 +1,5 @@
-import { NativeModules, requireNativeComponent, ViewStyle } from 'react-native';
+import * as React from 'react';
+import { NativeModules, Platform, View } from 'react-native';
 
 export enum CrispSessionEventColors {
   RED = 0,
@@ -25,9 +26,71 @@ type CrispChatSdkType = {
   show(): () => void;
 };
 
-const { CrispChatSdk } = NativeModules;
-export const CrispChatUI = requireNativeComponent(
-  'CrispView'
-) as React.ComponentClass<{ style: ViewStyle }, {}>;
+const CrispChatSdk = NativeModules.CrispChatSdk as CrispChatSdkType;
+
+const CrispChat: React.FC = () => {
+  React.useEffect(() => {
+    CrispChatSdk.show();
+  }, []);
+
+  return <View />;
+};
+
+export default CrispChat;
 
 export const CrispChatSDK = CrispChatSdk as CrispChatSdkType;
+
+export const setTokenId = (id: string) => {
+  if (Platform.OS === 'ios') {
+    CrispChatSdk.setTokenId(id);
+  }
+};
+
+export const setUserEmail = (email: string) => {
+  if (Platform.OS === 'ios') {
+    CrispChatSdk.setUserEmail(email);
+  }
+};
+
+export const setUserNickname = (name: string) => {
+  if (Platform.OS === 'ios') {
+    CrispChatSdk.setUserNickname(name);
+  }
+};
+
+export const setUserPhone = (phone: string) => {
+  if (Platform.OS === 'ios') {
+    CrispChatSdk.setUserPhone(phone);
+  }
+};
+
+export const setUserAvatar = (url: string) => {
+  if (Platform.OS === 'ios') {
+    CrispChatSdk.setUserAvatar(url);
+  }
+};
+
+export const setSessionSegment = (segment: string) => {
+  if (Platform.OS === 'ios') {
+    CrispChatSdk.setSessionSegment(segment);
+  }
+};
+
+export const pushSessionEvent = (
+  name: string,
+  color: CrispSessionEventColors
+) => {
+  if (Platform.OS === 'ios') {
+    CrispChatSdk.pushSessionEvent(name, color);
+  }
+};
+
+export const resetSession = () => {
+  if (Platform.OS === 'ios') {
+    CrispChatSdk.resetSession();
+  }
+};
+
+export const show = () => {
+  CrispChatSdk.show();
+};

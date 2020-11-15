@@ -11,7 +11,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
-#ifdef FB_SONARKIT_ENABLED
+#if DEBUG
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
 #import <FlipperKitUserDefaultsPlugin/FKUserDefaultsPlugin.h>
@@ -31,12 +31,11 @@ static void InitializeFlipper(UIApplication *application) {
 
 #import <Crisp/Crisp.h>
 
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  #ifdef FB_SONARKIT_ENABLED
+  #if DEBUG
     InitializeFlipper(application);
   #endif
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
@@ -51,7 +50,7 @@ static void InitializeFlipper(UIApplication *application) {
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-
+  
   [CrispSDK configureWithWebsiteID:@"YOUR_WEBSITE_ID"];
   
   return YES;

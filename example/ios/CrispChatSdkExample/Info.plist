@@ -37,12 +37,8 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Upload photos into the Crisp chat</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Save photos from the Crisp chat to you photo library</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
