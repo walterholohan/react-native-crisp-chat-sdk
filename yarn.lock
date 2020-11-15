@@ -9009,7 +9009,7 @@ release-it@^13.5.6:
     yaml "1.9.2"
     yargs-parser "18.1.3"
 
-release-it@^14.2.1:
+release-it@^14.1.0:
   version "14.2.1"
   resolved "https://registry.yarnpkg.com/release-it/-/release-it-14.2.1.tgz#e3d7b6daee45162a6fe903ef1b1b022a0d25c325"
   integrity sha512-zHXJjU2eOvVcbXTQSfgNC9DcDU7WgTc9qappBFfGRDicK//Bqt1KaOAEhCS6EZ9u4v7YbWBRbUejSrVXOLfCVQ==
