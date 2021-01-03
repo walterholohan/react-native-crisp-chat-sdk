@@ -38,8 +38,6 @@ const CrispChat: React.FC = () => {
 
 export default CrispChat;
 
-export const CrispChatSDK = CrispChatSdk as CrispChatSdkType;
-
 export const setTokenId = (id: string) => {
   if (Platform.OS === 'ios') {
     CrispChatSdk.setTokenId(id);

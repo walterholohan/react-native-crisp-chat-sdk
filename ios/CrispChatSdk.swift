@@ -33,8 +33,8 @@ class CrispChatSdk: NSObject {
     }
     
     @objc
-    func pushSessionEvent(_ name: String, _ color: Crisp.SessionEventColor) {
-        CrispSDK.session.pushEvent(SessionEvent(name: name, color: color))
+    func pushSessionEvent(_ eventName: String, color: Crisp.SessionEventColor) {
+        CrispSDK.session.pushEvent(Crisp.SessionEvent(name: eventName, color: color))
     }
 
     @objc
