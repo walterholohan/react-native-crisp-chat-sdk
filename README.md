@@ -71,7 +71,7 @@ Add the Crisp SDK in your dependencies in `app/build.gradle`:
 implementation 'im.crisp:crisp-sdk:1.0.0beta0'
 ```
 
-Initialize the library in your [Application subclass](MainApplication.java)
+Initialize the library in your [Application subclass](https://github.com/facebook/react-native/blob/master/template/android/app/src/main/java/com/helloworld/MainApplication.java)
 
 ```java
 import im.crisp.client.Crisp;
