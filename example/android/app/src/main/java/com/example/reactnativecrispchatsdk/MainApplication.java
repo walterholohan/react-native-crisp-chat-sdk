@@ -15,7 +15,10 @@ import com.reactnativecrispchatsdk.CrispChatSdkPackage;
 
 import im.crisp.client.Crisp;
 
-public class MainApplication extends Application implements ReactApplication {
+// Fixes multiDex error
+import androidx.multidex.MultiDexApplication;
+
+public class MainApplication extends MultiDexApplication implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
@@ -54,7 +57,7 @@ public class MainApplication extends Application implements ReactApplication {
 
     // Replace it with your WEBSITE_ID
     // Retrieve it using https://app.crisp.chat/website/[YOUR_WEBSITE_ID]/
-    Crisp.configure("YOUR_WEBSITE_ID");
+    Crisp.configure(getApplicationContext(),"YOUR_WEBSITE_ID");
   }
 
   /**

@@ -132,6 +132,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        // Fixes multiDex error
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -211,7 +214,10 @@ dependencies {
 
     implementation project(':reactnativecrispchatsdk')
 
-    implementation 'im.crisp:crisp-sdk:1.0.0beta0'
+    implementation 'im.crisp:crisp-sdk:1.0.1'
+
+    // Fixes multiDex error
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
 
 // Run this once to be able to run the application with BUCK

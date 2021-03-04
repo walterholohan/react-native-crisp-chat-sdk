@@ -68,7 +68,23 @@ All you have to do is:
 Add the Crisp SDK in your dependencies in `app/build.gradle`:
 
 ```groovy
-implementation 'im.crisp:crisp-sdk:1.0.0beta0'
+implementation 'im.crisp:crisp-sdk:1.0.1'
+```
+
+Configure your app for multidex:
+
+```groovy
+android {
+    defaultConfig {
+        multiDexEnabled true
+    }
+}
+dependencies {
+    // If you're using AndroidX
+    implementation 'androidx.multidex:multidex:2.0.1'
+    // If you're not using AndroidX
+    implementation 'com.android.support:multidex:1.0.3'
+}
 ```
 
 Initialize the library in your [Application subclass](https://github.com/facebook/react-native/blob/master/template/android/app/src/main/java/com/helloworld/MainApplication.java)
@@ -76,7 +92,10 @@ Initialize the library in your [Application subclass](https://github.com/faceboo
 ```java
 import im.crisp.client.Crisp;
 
-public class MainApplication extends Application implements ReactApplication {
+// Fixes multiDex error
+import androidx.multidex.MultiDexApplication;
+
+public class MainApplication extends MultiDexApplication implements ReactApplication {
 
     @Override
     public void onCreate() {
