@@ -45,15 +45,11 @@ export const setTokenId = (id: string) => {
 };
 
 export const setUserEmail = (email: string) => {
-  if (Platform.OS === 'ios') {
-    CrispChatSdk.setUserEmail(email);
-  }
+  CrispChatSdk.setUserEmail(email);
 };
 
 export const setUserNickname = (name: string) => {
-  if (Platform.OS === 'ios') {
-    CrispChatSdk.setUserNickname(name);
-  }
+  CrispChatSdk.setUserNickname(name);
 };
 
 export const setUserPhone = (phone: string) => {
@@ -84,9 +80,7 @@ export const pushSessionEvent = (
 };
 
 export const resetSession = () => {
-  if (Platform.OS === 'ios') {
-    CrispChatSdk.resetSession();
-  }
+  CrispChatSdk.resetSession();
 };
 
 export const show = () => {
