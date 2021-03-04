@@ -142,12 +142,12 @@ export default function App() {
 - `CrispChatSDK.show()`
 - `CrispChatSDK.setTokenId('XXXX')` (iOS only)
 - `CrispChatSDK.pushSessionEvent(name: "Signup", color: CrispSessionEventColors.blue)` (iOS only)
-- `CrispChatSDK.setUserEmail('test@test.com')` (iOS only)
-- `CrispChatSDK.setUserNickname('John Doe')` (iOS only)
+- `CrispChatSDK.setUserEmail('test@test.com')`
+- `CrispChatSDK.setUserNickname('John Doe')`
 - `CrispChatSDK.setUserPhone('003370123456789')` (iOS only)
 - `CrispChatSDK.setUserAvatar('https://pbs.twimg.com/profile_images/782474226020200448/zDo-gAo0_400x400.jpg')` (iOS only)
 - `CrispChatSDK.setSessionSegment('segment')` (iOS only)
-- `CrispChatSDK.resetSession()` (iOS only)
+- `CrispChatSDK.resetSession()`
 
 ## Contributing
 
