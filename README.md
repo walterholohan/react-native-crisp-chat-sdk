@@ -103,7 +103,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
 
         // Replace it with your WEBSITE_ID
         // Retrieve it using https://app.crisp.chat/website/[YOUR_WEBSITE_ID]/
-        Crisp.configure("YOUR_WEBSITE_ID");
+        Crisp.configure(getApplicationContext(),"YOUR_WEBSITE_ID");
     }
 }
 ```
