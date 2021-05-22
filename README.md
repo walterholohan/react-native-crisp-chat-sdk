@@ -68,7 +68,7 @@ All you have to do is:
 Add the Crisp SDK in your dependencies in `app/build.gradle`:
 
 ```groovy
-implementation 'im.crisp:crisp-sdk:1.0.1'
+implementation 'im.crisp:crisp-sdk:1.0.4'
 ```
 
 Configure your app for multidex:
@@ -125,14 +125,23 @@ Crisp Website ID is an UUID like e30a04ee-f81c-4935-b8d8-5fa55831b1c0
 You can view the [example project](./example/src/App.tsx) for more usage.
 
 ```js
-import CrispChat, { setUserEmail } from 'react-native-crisp-chat-sdk';
+import CrispChat, { setUserEmail, setUserNickname, setUserPhone, resetSession } from 'react-native-crisp-chat-sdk';
 
 // ...
 export default function App() {
+  // this should be user ID that way app will load previous user chats
+  setUserTokenId('abcd12345');
+
+  // Set user's info
   setUserEmail('test@test.com');
+  setUserNickname('John Smith');
+  setUserPhone('+614430231224');
+
+  // Call session reset when user loggs out
+  resetSession()
 
   return (
-    <CrispChat />;
+    <CrispChat />
   )
 }
 ```
@@ -140,13 +149,16 @@ export default function App() {
 ## Availables APIs:
 
 - `CrispChatSDK.show()`
-- `CrispChatSDK.setTokenId('XXXX')` (iOS only)
-- `CrispChatSDK.pushSessionEvent(name: "Signup", color: CrispSessionEventColors.blue)` (iOS only)
+- `CrispChatSDK.setTokenId('userID/GUID')`
+- `CrispChatSDK.pushSessionEvent(name: "Signup", color: CrispSessionEventColors.blue)`
 - `CrispChatSDK.setUserEmail('test@test.com')`
 - `CrispChatSDK.setUserNickname('John Doe')`
-- `CrispChatSDK.setUserPhone('003370123456789')` (iOS only)
-- `CrispChatSDK.setUserAvatar('https://pbs.twimg.com/profile_images/782474226020200448/zDo-gAo0_400x400.jpg')` (iOS only)
-- `CrispChatSDK.setSessionSegment('segment')` (iOS only)
+- `CrispChatSDK.setUserPhone('003370123456789')`
+- `CrispChatSDK.setUserAvatar('https://pbs.twimg.com/profile_images/782474226020200448/zDo-gAo0_400x400.jpg')`
+- `CrispChatSDK.setSessionSegment('segment')`
+- `CrispChatSDK.setSessionString('key', 'value')`
+- `CrispChatSDK.setSessionBool('key', 'value')`
+- `CrispChatSDK.setSessionInt('key', 'value')`
 - `CrispChatSDK.resetSession()`
 
 ## Contributing

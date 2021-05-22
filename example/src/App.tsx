@@ -5,6 +5,9 @@ import CrispChat, {
   pushSessionEvent,
   resetSession,
   setSessionSegment,
+  setSessionString,
+  setSessionBool,
+  setSessionInt,
   setTokenId,
   setUserAvatar,
   setUserEmail,
@@ -29,6 +32,17 @@ export default function App() {
       </TouchableOpacity>
       <TouchableOpacity onPress={() => setUserEmail('test@test.com')}>
         <Text>Set User Email</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => setSessionString('stringkey', 'string value')}
+      >
+        <Text>Set Session String</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => setSessionBool('boolkey', true)}>
+        <Text>Set Session Boolean</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => setSessionInt('intkey', 10)}>
+        <Text>Set Session Int</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => setUserNickname('John Smith')}>
         <Text>Set User Nickname</Text>
