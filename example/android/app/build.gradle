@@ -210,7 +210,7 @@ dependencies {
 
     implementation project(':reactnativecrispchatsdk')
 
-    implementation 'im.crisp:crisp-sdk:1.0.1'
+    implementation 'im.crisp:crisp-sdk:1.0.4'
 
     // Fixes multiDex error
     implementation 'androidx.multidex:multidex:2.0.1'

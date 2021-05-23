@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NativeModules, Platform, View } from 'react-native';
+import { NativeModules, View } from 'react-native';
 
 export enum CrispSessionEventColors {
   RED = 0,
@@ -21,6 +21,9 @@ type CrispChatSdkType = {
   setUserPhone(phone: string): () => void;
   setUserAvatar(url: string): () => void;
   setSessionSegment(segment: string): () => void;
+  setSessionString(key: string, value: string): () => void;
+  setSessionBool(key: string, value: boolean): () => void;
+  setSessionInt(key: string, value: number): () => void;
   pushSessionEvent(name: string, color: CrispSessionEventColors): () => void;
   resetSession(): () => void;
   show(): () => void;
@@ -39,9 +42,7 @@ const CrispChat: React.FC = () => {
 export default CrispChat;
 
 export const setTokenId = (id: string) => {
-  if (Platform.OS === 'ios') {
-    CrispChatSdk.setTokenId(id);
-  }
+  CrispChatSdk.setTokenId(id);
 };
 
 export const setUserEmail = (email: string) => {
@@ -53,30 +54,34 @@ export const setUserNickname = (name: string) => {
 };
 
 export const setUserPhone = (phone: string) => {
-  if (Platform.OS === 'ios') {
-    CrispChatSdk.setUserPhone(phone);
-  }
+  CrispChatSdk.setUserPhone(phone);
 };
 
 export const setUserAvatar = (url: string) => {
-  if (Platform.OS === 'ios') {
-    CrispChatSdk.setUserAvatar(url);
-  }
+  CrispChatSdk.setUserAvatar(url);
 };
 
 export const setSessionSegment = (segment: string) => {
-  if (Platform.OS === 'ios') {
-    CrispChatSdk.setSessionSegment(segment);
-  }
+  CrispChatSdk.setSessionSegment(segment);
+};
+
+export const setSessionString = (key: string, value: string) => {
+  CrispChatSdk.setSessionString(key, value);
+};
+
+export const setSessionBool = (key: string, value: boolean) => {
+  CrispChatSdk.setSessionBool(key, value);
+};
+
+export const setSessionInt = (key: string, value: number) => {
+  CrispChatSdk.setSessionInt(key, value);
 };
 
 export const pushSessionEvent = (
   name: string,
   color: CrispSessionEventColors
 ) => {
-  if (Platform.OS === 'ios') {
-    CrispChatSdk.pushSessionEvent(name, color);
-  }
+  CrispChatSdk.pushSessionEvent(name, color);
 };
 
 export const resetSession = () => {
