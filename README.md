@@ -65,11 +65,25 @@ All you have to do is:
 
 ### Android
 
+Add our bintray in your repositories.
+
+RN 0.65.0 has removed jscenter() but its important that we add it back in for now. Once the offical Crisp Android SDK removes this dependency we can revert back.
+
+````groovy
+repositories {
+    // Keep your previous repositories
+    mavenCentral()
+    // Even with jcenter end of life, we still need it because we're using exoplayer 2.13.0 for compatibility issue,
+    // which is not hosted on Google nor Central maven repos (see https://github.com/google/ExoPlayer/issues/5246)
+    jcenter()
+}
+```
+
 Add the Crisp SDK in your dependencies in `app/build.gradle`:
 
 ```groovy
-implementation 'im.crisp:crisp-sdk:1.0.4'
-```
+implementation 'im.crisp:crisp-sdk:1.0.7'
+````
 
 Configure your app for multidex:
 
@@ -125,7 +139,12 @@ Crisp Website ID is an UUID like e30a04ee-f81c-4935-b8d8-5fa55831b1c0
 You can view the [example project](./example/src/App.tsx) for more usage.
 
 ```js
-import CrispChat, { setUserEmail, setUserNickname, setUserPhone, resetSession } from 'react-native-crisp-chat-sdk';
+import CrispChat, {
+  setUserEmail,
+  setUserNickname,
+  setUserPhone,
+  resetSession,
+} from 'react-native-crisp-chat-sdk';
 
 // ...
 export default function App() {
@@ -138,11 +157,9 @@ export default function App() {
   setUserPhone('+614430231224');
 
   // Call session reset when user loggs out
-  resetSession()
+  resetSession();
 
-  return (
-    <CrispChat />
-  )
+  return <CrispChat />;
 }
 ```
 
