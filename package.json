@@ -4,7 +4,7 @@
   "description": "React-Native bridge for Crisp chat iOS and Android SDK&#39;s",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
-  "types": "lib/typescript/src/index.d.ts",
+  "types": "lib/typescript/index.d.ts",
   "react-native": "src/index",
   "source": "src/index",
   "files": [
