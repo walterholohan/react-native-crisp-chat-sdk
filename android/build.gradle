@@ -55,10 +55,6 @@ repositories {
   jcenter()
   google()
 
-  maven {
-    url 'https://dl.bintray.com/crispim/crisp-maven'
-  }
-
   def found = false
   def defaultDir = null
   def androidSourcesName = 'React Native sources'
