@@ -163,6 +163,27 @@ export default function App() {
 }
 ```
 
+## Language management
+
+Explicitly setting alternative languages from React is not currently supported. Nevertheless, the underlying SDK is able
+to select automatically the locale matching the one of device. The locale detection works out-of-the-box on Android.
+However, for the locale of the device to be detected on iOS apps, it has to be declared and setup in xcode as a
+supported language.
+
+Here is a suggested method for adding languages support to your app in Xcode 13:
+
+Start by adding support for your particular language in your project info (`<yourProject>` > `Info` > `Localizations` >
+`+`). To make it active, you also need to create at least one dummy StringFile (`File` > `New` > `File...`) with a
+localized version matching the language you wish to add support to. After this step, if the locale of the device matches
+the language you set up, it will be exposed by the app and chosen by the Crisp SDK. Note that alternative methods may
+exist, but have not been tested regarding the locale detection of the Crisp SDK.
+
+For iOS apps, debugging the preferred language exposed by your app can be achieved by adding the following line in your
+AppDelegate.m file : `NSLog(@"localeIdentifier: %@", [[NSLocale currentLocale] localeIdentifier]);`
+
+If for example, `localeIdentifier: en_FR` or `localeIdentifier: en_US` appears in your Xcode logs, then Crisp will be
+displayed in english. If `localeIdentifier: fr_FR` appears in your Xcode logs, it will be displayed in french.
+
 ## Availables APIs:
 
 - `CrispChatSDK.show()`
