@@ -73,16 +73,13 @@ RN 0.65.0 has removed jscenter() but its important that we add it back in for no
 repositories {
     // Keep your previous repositories
     mavenCentral()
-    // Even with jcenter end of life, we still need it because we're using exoplayer 2.13.0 for compatibility issue,
-    // which is not hosted on Google nor Central maven repos (see https://github.com/google/ExoPlayer/issues/5246)
-    jcenter()
 }
 ```
 
 Add the Crisp SDK in your dependencies in `app/build.gradle`:
 
 ```groovy
-implementation 'im.crisp:crisp-sdk:1.0.7'
+implementation 'im.crisp:crisp-sdk:1.0.9'
 ````
 
 Configure your app for multidex:
