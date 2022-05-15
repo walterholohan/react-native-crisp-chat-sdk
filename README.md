@@ -37,10 +37,22 @@ For versions below 0.60.0, use rnpm links
 
 ### iOS
 
-Start using Crisp by adding the following code on your AppDelegate :
+## RN <= 0.67
+
+Start using Crisp by adding the following code on your `AppDelegate.m` :
 
 ```objective-c
 #import <Crisp/Crisp.h>
+
+[CrispSDK configureWithWebsiteID:@"YOUR_WEBSITE_ID"];
+```
+
+## RN >= 0.68
+
+Start using Crisp by adding the following code on your `AppDelegate.mm` :
+
+```objective-c
+#import <Crisp/Crisp-Swift.h>
 
 [CrispSDK configureWithWebsiteID:@"YOUR_WEBSITE_ID"];
 ```
