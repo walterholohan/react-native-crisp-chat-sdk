@@ -8,6 +8,7 @@ React-Native bridge for Crisp chat iOS and Android SDK&#39;s
 
 - iOS & Android Support (In beta)
 - Typescript Support
+- [Expo](/plugin/install.md) support with custom dev client
 
 ## Installation
 
@@ -20,6 +21,10 @@ yarn add react-native-crisp-chat-sdk
 ```sh
 npm install --save react-native-crisp-chat-sdk
 ```
+
+## Expo support
+
+This package is not available in the [Expo Go](https://expo.io/client) app. Learn how you can use it with [custom dev clients](/plugin/install.md).
 
 ### iOS Installation
 
