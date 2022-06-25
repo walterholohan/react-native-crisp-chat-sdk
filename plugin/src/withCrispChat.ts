@@ -3,14 +3,14 @@ import {
   withMainApplication,
   withAppDelegate,
   createRunOncePlugin,
+  ConfigPlugin,
 } from '@expo/config-plugins';
-import type { ExpoConfig } from '@expo/config-types';
 
 import { mergeContents } from '@expo/config-plugins/build/utils/generateCode';
 
-const withReactNativeCrisp = (
-  expoConfig: ExpoConfig,
-  { websiteId }: { websiteId: string }
+const withReactNativeCrisp: ConfigPlugin<{ websiteId?: string }> = (
+  expoConfig,
+  { websiteId = 'YOUR_WEBSITE_ID' } = {}
 ) => {
   withAppDelegate(expoConfig, (modConfig) => {
     if (['objc', 'objcpp'].includes(modConfig.modResults.language)) {
