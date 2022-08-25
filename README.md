@@ -96,7 +96,7 @@ repositories {
 Add the Crisp SDK in your dependencies in `app/build.gradle`:
 
 ```groovy
-implementation 'im.crisp:crisp-sdk:1.0.9'
+implementation 'im.crisp:crisp-sdk:1.0.13'
 ````
 
 Configure your app for multidex:
