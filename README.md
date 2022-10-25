@@ -86,7 +86,7 @@ Add our bintray in your repositories.
 
 RN 0.65.0 has removed jscenter() but its important that we add it back in for now. Once the offical Crisp Android SDK removes this dependency we can revert back.
 
-````groovy
+```groovy
 repositories {
     // Keep your previous repositories
     mavenCentral()
@@ -97,7 +97,7 @@ Add the Crisp SDK in your dependencies in `app/build.gradle`:
 
 ```groovy
 implementation 'im.crisp:crisp-sdk:1.0.13'
-````
+```
 
 Configure your app for multidex:
 
