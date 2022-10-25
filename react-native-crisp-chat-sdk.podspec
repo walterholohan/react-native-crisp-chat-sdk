@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license      = package["license"]
   s.authors      = package["author"]
 
-  s.platforms    = { :ios => "10.0" }
+  s.platforms    = { :ios => "13.0" }
   s.source       = { :git => "https://github.com/walterholohan/react-native-crisp-chat-sdk.git", :tag => "#{s.version}" }
 
 
@@ -20,5 +20,5 @@ Pod::Spec.new do |s|
   s.dependency "React"
 
   # Crisp dependency
-  s.dependency "Crisp", "1.6.1"
+  s.dependency "Crisp", "1.6.4"
 end
