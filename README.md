@@ -2,7 +2,7 @@
 
 React-Native bridge for Crisp chat iOS and Android SDK&#39;s
 
-![crisp screenshot](./screenshot.png)
+<img src="./screenshot.png" width="375" alt="Crisp screenshot">
 
 ## Features
 
