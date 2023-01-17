@@ -126,5 +126,5 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'im.crisp:crisp-sdk:1.0.13'
+  implementation 'im.crisp:crisp-sdk:1.0.14'
 }
