@@ -60,7 +60,13 @@ class CrispChatSdk: NSObject {
     @objc
     func show() {
         DispatchQueue.main.async {
-            UIApplication.shared.windows.first?.rootViewController?.present(ChatViewController(), animated: true)
+            var viewController = RCTPresentedViewController()
+
+            if viewController == nil {
+                viewController = UIApplication.shared.windows.first?.rootViewController
+            }
+
+            viewController?.present(ChatViewController(), animated: true)
         }
     }
 
