@@ -61,16 +61,14 @@ export function setAppDelegateCall(src: string, websiteId: string) {
     tag: 'react-native-crisp-chat-sdk-call',
     src,
     newSrc: `[CrispSDK configureWithWebsiteID:@"${websiteId}"];`,
-    anchor:
-      /- \(BOOL\)application:\(UIApplication \*\)application didFinishLaunchingWithOptions:\(NSDictionary \*\)launchOptions/,
+    anchor: /- \(BOOL\)application:\(UIApplication \*\)application didFinishLaunchingWithOptions:\(NSDictionary \*\)launchOptions/,
     offset: 2,
     comment: '//',
   });
 }
 
 export function setMainConfiguration(main: string, websiteId: string) {
-  const multiDexApp =
-    /public class MainApplication extends MultiDexApplication implements ReactApplication {/g;
+  const multiDexApp = /public class MainApplication extends MultiDexApplication implements ReactApplication {/g;
   let result = main;
   if (!main.match(multiDexApp)) {
     result = result.replace(
@@ -92,8 +90,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     );
   }
 
-  const cripWebsiteConfig =
-    /Crisp\.configure\(getApplicationContext\(\),"(\w|\d|-)+"\);/g;
+  const cripWebsiteConfig = /Crisp\.configure\(getApplicationContext\(\),"(\w|\d|-)+"\);/g;
   if (!main.match(cripWebsiteConfig)) {
     result = result.replace(
       /super\.onCreate\(\);/,
@@ -107,13 +104,13 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
 }
 
 export function setGradleCrispDependency(buildGradle: string) {
-  const crispDependency = /implementation 'im.crisp:crisp-sdk:1.0.10'/g;
+  const crispDependency = /implementation 'im.crisp:crisp-sdk:1.0.14'/g;
   let result = buildGradle;
   if (!result.match(crispDependency)) {
     result = result.replace(
       /dependencies\s?{/,
       `dependencies {
-    implementation 'im.crisp:crisp-sdk:1.0.10'`
+    implementation 'im.crisp:crisp-sdk:1.0.14'`
     );
   }
 
