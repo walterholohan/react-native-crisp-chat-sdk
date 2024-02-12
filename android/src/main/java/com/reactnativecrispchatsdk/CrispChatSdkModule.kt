@@ -100,8 +100,8 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
     }
 
     @ReactMethod
-    fun configure(websiteID: String) {
+    fun configure(websiteId: String) {
         val context = reactApplicationContext
-        Crisp.configure(context, websiteID)
+        Crisp.configure(context, websiteId)
     }
 }
