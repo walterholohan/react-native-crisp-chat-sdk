@@ -14,6 +14,6 @@ RCT_EXTERN_METHOD(setSessionInt:(NSString *)key value:(int)value)
 RCT_EXTERN_METHOD(pushSessionEvent:(NSString *)eventName color:(NSInteger *)color)
 RCT_EXTERN_METHOD(resetSession)
 RCT_EXTERN_METHOD(show)
-RCT_EXTERN_METHOD(configure:(NSString *)websiteID)
+RCT_EXTERN_METHOD(configure:(NSString *)websiteId)
 
 @end
