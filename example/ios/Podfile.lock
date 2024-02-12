@@ -1,7 +1,7 @@
 PODS:
   - boost-for-react-native (1.63.0)
   - CocoaAsyncSocket (7.6.5)
-  - Crisp (1.6.1)
+  - Crisp (2.2.1)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.64.1)
   - FBReactNativeSpec (0.64.1):
@@ -254,7 +254,7 @@ PODS:
     - React-perflogger (= 0.64.1)
   - React-jsinspector (0.64.1)
   - react-native-crisp-chat-sdk (0.10.2):
-    - Crisp (= 1.6.1)
+    - Crisp (= 2.2.1)
     - React
   - React-perflogger (0.64.1)
   - React-RCTActionSheet (0.64.1):

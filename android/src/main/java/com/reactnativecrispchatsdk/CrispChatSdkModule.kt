@@ -98,4 +98,10 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
         crispIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(crispIntent)
     }
+
+    @ReactMethod
+    fun configure(websiteID: String) {
+        val context = reactApplicationContext
+        Crisp.configure(context, websiteID)
+    }
 }

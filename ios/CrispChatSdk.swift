@@ -75,4 +75,9 @@ class CrispChatSdk: NSObject {
         return true
     }
 
+    @objc
+    static func configure(_ websiteId: String) -> Bool {
+        CrispSDK.configure(websiteID: websiteId)
+    }
+
 }
