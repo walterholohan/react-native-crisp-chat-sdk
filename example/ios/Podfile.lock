@@ -1,7 +1,9 @@
 PODS:
   - boost-for-react-native (1.63.0)
   - CocoaAsyncSocket (7.6.5)
-  - Crisp (1.6.1)
+  - Crisp (2.2.1):
+    - Crisp/Crisp (= 2.2.1)
+  - Crisp/Crisp (2.2.1)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.64.1)
   - FBReactNativeSpec (0.64.1):
@@ -253,8 +255,8 @@ PODS:
     - React-jsi (= 0.64.1)
     - React-perflogger (= 0.64.1)
   - React-jsinspector (0.64.1)
-  - react-native-crisp-chat-sdk (0.10.2):
-    - Crisp (= 1.6.1)
+  - react-native-crisp-chat-sdk (0.13.4):
+    - Crisp (= 2.2.1)
     - React
   - React-perflogger (0.64.1)
   - React-RCTActionSheet (0.64.1):
@@ -455,10 +457,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  Crisp: a99189db0fad83bd00763077b67e37999c4a76df
+  Crisp: 7596490beb8c0d23e41c5ade5d51b7937a5a589c
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: 7b423f9e248eae65987838148c36eec1dbfe0b53
-  FBReactNativeSpec: 97c8b6f089e97ce778dd6057885c10cba92dec29
+  FBReactNativeSpec: 3e861b675b3d3feba3726ba3add7a7919314b604
   Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
   Flipper-Folly: 755929a4f851b2fb2c347d533a23f191b008554c
@@ -480,7 +482,7 @@ SPEC CHECKSUMS:
   React-jsi: 5de8204706bd872b78ea646aee5d2561ca1214b6
   React-jsiexecutor: 124e8f99992490d0d13e0649d950d3e1aae06fe9
   React-jsinspector: 500a59626037be5b3b3d89c5151bc3baa9abf1a9
-  react-native-crisp-chat-sdk: 9ab70a00c7dcb33646416e19b9d2f460cc57186d
+  react-native-crisp-chat-sdk: cfea680945ac292fbdea6144e51d30d8ea6df757
   React-perflogger: aad6d4b4a267936b3667260d1f649b6f6069a675
   React-RCTActionSheet: fc376be462c9c8d6ad82c0905442fd77f82a9d2a
   React-RCTAnimation: ba0a1c3a2738be224a08092fa7f1b444ab77d309
@@ -498,4 +500,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 97ee25ba7e59218755641a311b02447868bf4334
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.14.3
