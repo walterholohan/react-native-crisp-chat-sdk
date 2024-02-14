@@ -2,7 +2,7 @@
 
 @interface RCT_EXTERN_MODULE(CrispChatSdk, NSObject)
 
-RCT_EXTERN_METHOD(configure)
+RCT_EXTERN_METHOD(configure:(NSString *)websiteId)
 RCT_EXTERN_METHOD(setTokenId:(NSString *)id)
 RCT_EXTERN_METHOD(setUserEmail:(NSString *)email)
 RCT_EXTERN_METHOD(setUserNickname:(NSString *)nickname)
