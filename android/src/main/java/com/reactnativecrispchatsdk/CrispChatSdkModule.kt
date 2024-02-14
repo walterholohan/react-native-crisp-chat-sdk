@@ -17,6 +17,13 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
         return "CrispChatSdk"
     }
 
+
+    @ReactMethod
+    fun configure(websiteId: String) {
+        val context = reactApplicationContext
+        Crisp.configure(context, websiteId)
+    }
+
     @ReactMethod
     fun setTokenId(id: String){
         Crisp.setTokenID(id)

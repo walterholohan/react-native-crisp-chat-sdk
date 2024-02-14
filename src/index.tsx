@@ -27,6 +27,7 @@ type CrispChatSdkType = {
   pushSessionEvent(name: string, color: CrispSessionEventColors): () => void;
   resetSession(): () => void;
   show(): () => void;
+  configure(websiteId: string): () => void;
 };
 
 const CrispChatSdk = NativeModules.CrispChatSdk as CrispChatSdkType;
@@ -40,6 +41,10 @@ const CrispChat: React.FC = () => {
 };
 
 export default CrispChat;
+
+export const configure = (websiteId: string) => {
+  CrispChatSdk.configure(websiteId);
+};
 
 export const setTokenId = (id: string) => {
   CrispChatSdk.setTokenId(id);

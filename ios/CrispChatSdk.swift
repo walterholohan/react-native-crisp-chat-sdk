@@ -4,6 +4,11 @@ import Crisp
 class CrispChatSdk: NSObject {
 
     @objc
+    func configure(_ websiteId: String) {
+        CrispSDK.configure(websiteID: websiteId)
+    }
+
+    @objc
     func setTokenId(_ id: String) {
         CrispSDK.setTokenID(tokenID: id)
     }
