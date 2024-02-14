@@ -4,7 +4,7 @@ import Crisp
 class CrispChatSdk: NSObject {
 
     @objc
-    func configure(_ websiteId: String) {
+    func configureWithWebsiteId(_ websiteId: String) {
         CrispSDK.configure(websiteID: websiteId)
     }
 
