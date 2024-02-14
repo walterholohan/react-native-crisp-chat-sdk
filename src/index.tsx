@@ -42,7 +42,7 @@ const CrispChat: React.FC = () => {
 
 export default CrispChat;
 
-export const configureWithWebsiteId = (websiteId: string) => {
+export const configure = (websiteId: string) => {
   CrispChatSdk.configure(websiteId);
 };
 

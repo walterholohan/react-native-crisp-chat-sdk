@@ -212,7 +212,7 @@ displayed in english. If `localeIdentifier: fr_FR` appears in your Xcode logs, i
 - `CrispChatSDK.setSessionBool('key', 'value')`
 - `CrispChatSDK.setSessionInt('key', 'value')`
 - `CrispChatSDK.resetSession()`
-- `CrispChatSDK.configureWithWebsiteId('YOUR_WEBSITE_ID')`
+- `CrispChatSDK.configure('YOUR_WEBSITE_ID')`
 
 ## Contributing
 
