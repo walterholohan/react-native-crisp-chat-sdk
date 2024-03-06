@@ -43,50 +43,50 @@ const CrispChat: React.FC = () => {
 export default CrispChat;
 
 export const configure = (websiteId: string) => {
-  CrispChatSdk.configure(websiteId);
+  CrispChatSdk.configure(String(websiteId));
 };
 
 export const setTokenId = (id: string) => {
-  CrispChatSdk.setTokenId(id);
+  CrispChatSdk.setTokenId(String(id));
 };
 
 export const setUserEmail = (email: string) => {
-  CrispChatSdk.setUserEmail(email);
+  CrispChatSdk.setUserEmail(String(email));
 };
 
 export const setUserNickname = (name: string) => {
-  CrispChatSdk.setUserNickname(name);
+  CrispChatSdk.setUserNickname(String(name));
 };
 
 export const setUserPhone = (phone: string) => {
-  CrispChatSdk.setUserPhone(phone);
+  CrispChatSdk.setUserPhone(String(phone));
 };
 
 export const setUserAvatar = (url: string) => {
-  CrispChatSdk.setUserAvatar(url);
+  CrispChatSdk.setUserAvatar(String(url));
 };
 
 export const setSessionSegment = (segment: string) => {
-  CrispChatSdk.setSessionSegment(segment);
+  CrispChatSdk.setSessionSegment(String(segment));
 };
 
 export const setSessionString = (key: string, value: string) => {
-  CrispChatSdk.setSessionString(key, value);
+  CrispChatSdk.setSessionString(String(key), String(value));
 };
 
 export const setSessionBool = (key: string, value: boolean) => {
-  CrispChatSdk.setSessionBool(key, value);
+  CrispChatSdk.setSessionBool(String(key), Boolean(value));
 };
 
 export const setSessionInt = (key: string, value: number) => {
-  CrispChatSdk.setSessionInt(key, value);
+  CrispChatSdk.setSessionInt(String(key), Number(value));
 };
 
 export const pushSessionEvent = (
   name: string,
   color: CrispSessionEventColors
 ) => {
-  CrispChatSdk.pushSessionEvent(name, color);
+  CrispChatSdk.pushSessionEvent(String(name), color);
 };
 
 export const resetSession = () => {
