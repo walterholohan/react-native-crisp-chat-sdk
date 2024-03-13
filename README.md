@@ -6,7 +6,7 @@ React-Native bridge for Crisp chat iOS and Android SDK&#39;s
 
 ## Features
 
-- iOS & Android Support (In beta)
+- iOS & Android Support
 - Typescript Support
 - [Expo](/plugin/install.md) support with custom dev client
 
@@ -42,99 +42,10 @@ For versions below 0.60.0, use rnpm links
 
 ### iOS
 
-## RN <= 0.67
-
-Start using Crisp by adding the following code on your `AppDelegate.m` :
-
-```objective-c
-#import <Crisp/Crisp.h>
-
-[CrispSDK configureWithWebsiteID:@"YOUR_WEBSITE_ID"];
-```
-
-## RN >= 0.68
-
-Start using Crisp by adding the following code on your `AppDelegate.mm` :
-
-```objective-c
-#import <Crisp/Crisp-Swift.h>
-
-[CrispSDK configureWithWebsiteID:@"YOUR_WEBSITE_ID"];
-```
-
 #### Update your Info.plist
 
 To enable your users to take and upload photos to the chat as well as download photos to their photo library, add the
 `Privacy - Camera Usage Description` ([NSCameraUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nscamerausagedescription)) and `Privacy - Photo Library Additions Usage Description` ([NSPhotoLibraryAddUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsphotolibraryaddusagedescription)) to your app's Info.plist.
-
-#### Additional Steps
-
-This library was written in Swift, so in-order for you app to compile, you need to have at least one .swift file in your source code a bridging header to avoid a runtime error like so:
-
-![swift error](./swift-error.png)
-
-All you have to do is:
-
-- File > New > File
-- Swift File
-- Name the file whatever you wish
-- When prompted to create a bridging header, do so
-
-### Android
-
-Add our bintray in your repositories.
-
-RN 0.65.0 has removed jscenter() but its important that we add it back in for now. Once the offical Crisp Android SDK removes this dependency we can revert back.
-
-```groovy
-repositories {
-    // Keep your previous repositories
-    mavenCentral()
-}
-```
-
-Add the Crisp SDK in your dependencies in `app/build.gradle`:
-
-```groovy
-implementation 'im.crisp:crisp-sdk:1.0.14'
-```
-
-Configure your app for multidex:
-
-```groovy
-android {
-    defaultConfig {
-        multiDexEnabled true
-    }
-}
-dependencies {
-    // If you're using AndroidX
-    implementation 'androidx.multidex:multidex:2.0.1'
-    // If you're not using AndroidX
-    implementation 'com.android.support:multidex:1.0.3'
-}
-```
-
-Initialize the library in your [Application subclass](https://github.com/facebook/react-native/blob/master/template/android/app/src/main/java/com/helloworld/MainApplication.java)
-
-```java
-import im.crisp.client.Crisp;
-
-// Fixes multiDex error
-import androidx.multidex.MultiDexApplication;
-
-public class MainApplication extends MultiDexApplication implements ReactApplication {
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        // Replace it with your WEBSITE_ID
-        // Retrieve it using https://app.crisp.chat/website/[YOUR_WEBSITE_ID]/
-        Crisp.configure(getApplicationContext(),"YOUR_WEBSITE_ID");
-    }
-}
-```
 
 ## Requirements
 
@@ -154,6 +65,7 @@ You can view the [example project](./example/src/App.tsx) for more usage.
 
 ```js
 import CrispChat, {
+  configure,
   setUserEmail,
   setUserNickname,
   setUserPhone,
@@ -162,6 +74,9 @@ import CrispChat, {
 
 // ...
 export default function App() {
+  // You must set your website ID before calling <CrispChat />
+  configure("YOUR_WEBSITE_ID");
+
   // this should be user ID that way app will load previous user chats
   setUserTokenId('abcd12345');
 
