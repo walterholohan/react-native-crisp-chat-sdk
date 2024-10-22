@@ -107,13 +107,13 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
 }
 
 export function setGradleCrispDependency(buildGradle: string) {
-  const crispDependency = /implementation 'im.crisp:crisp-sdk:2.0.0beta1'/g;
+  const crispDependency = /implementation 'im.crisp:crisp-sdk:2.0.5'/g;
   let result = buildGradle;
   if (!result.match(crispDependency)) {
     result = result.replace(
       /dependencies\s?{/,
       `dependencies {
-    implementation 'im.crisp:crisp-sdk:2.0.0beta1'`
+    implementation 'im.crisp:crisp-sdk:2.0.5'`
     );
   }
 
