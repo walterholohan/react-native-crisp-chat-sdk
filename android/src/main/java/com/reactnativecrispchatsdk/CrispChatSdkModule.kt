@@ -5,10 +5,10 @@ import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
-import im.crisp.client.ChatActivity
-import im.crisp.client.Crisp
-import im.crisp.client.data.SessionEvent
-import im.crisp.client.data.SessionEvent.Color
+import im.crisp.client.external.ChatActivity
+import im.crisp.client.external.Crisp
+import im.crisp.client.external.data.SessionEvent
+import im.crisp.client.external.data.SessionEvent.Color
 
 
 class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {

@@ -82,11 +82,11 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     );
   }
 
-  const cripsImport = /import im.crisp.client.Crisp;/g;
+  const cripsImport = /import im.crisp.client.external.Crisp;/g;
   if (!main.match(cripsImport)) {
     result = result.replace(
       /public class MainApplication extends MultiDexApplication implements ReactApplication {/,
-      `import im.crisp.client.Crisp;
+      `import im.crisp.client.external.Crisp;
       
 public class MainApplication extends MultiDexApplication implements ReactApplication {`
     );
