@@ -1,8 +1,8 @@
 PODS:
   - boost (1.83.0)
-  - Crisp (2.5.5):
-    - Crisp/Crisp (= 2.5.5)
-  - Crisp/Crisp (2.5.5)
+  - Crisp (2.8.1):
+    - Crisp/Crisp (= 2.8.1)
+  - Crisp/Crisp (2.8.1)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.74.4)
   - fmt (9.1.0)
@@ -938,8 +938,8 @@ PODS:
   - React-Mapbuffer (0.74.4):
     - glog
     - React-debug
-  - react-native-crisp-chat-sdk (0.14.5):
-    - Crisp (= 2.5.5)
+  - react-native-crisp-chat-sdk (0.15.2):
+    - Crisp (= 2.8.1)
     - React
   - React-nativeconfig (0.74.4)
   - React-NativeModulesApple (0.74.4):
@@ -1352,7 +1352,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
-  Crisp: dcf7d9e64be6614ceee71c5582f616212ed4a881
+  Crisp: 0ff88141775c806ed3c8683595e1c10b06beb5d2
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
   FBLazyVector: 4c674c2d53de79c145d6a723910543d7b57ed74c
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
@@ -1382,7 +1382,7 @@ SPEC CHECKSUMS:
   React-jsitracing: 4e9c99e73a6269b27b0d4cbab277dd90df3e5ac0
   React-logger: fbfb50e2a2b1b46ee087f0a52739fadecc5e81a4
   React-Mapbuffer: d39610dff659d8cf1fea485abae08bbf6f9c8279
-  react-native-crisp-chat-sdk: 47fe24994f1231f4dca608c460604886504d1def
+  react-native-crisp-chat-sdk: d6b1c9c8d9a6248342740fe6b14c8df742f6a7ca
   React-nativeconfig: 2be4363c2c4ac2b42419577774e83e4e4fd2af9f
   React-NativeModulesApple: 453ada38f826a508e48872c7a7877c431af48bba
   React-perflogger: 9745f800ab4d12ec4325bde7bd090eafb87c5570
