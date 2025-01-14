@@ -10,11 +10,16 @@ import { defaultMainApplication } from './fixtures/mainApplication';
 
 describe(setGradleCrispDependency, () => {
   it('add crisp dependency in build.gradle', () => {
-    expect(setGradleCrispDependency(defaultBuildGradle)).toMatchSnapshot();
+    expect(
+      setGradleCrispDependency(defaultBuildGradle, false)
+    ).toMatchSnapshot();
   });
   it('add twice leads to same result', (): void => {
-    expect(setGradleCrispDependency(defaultBuildGradle)).toMatch(
-      setGradleCrispDependency(setGradleCrispDependency(defaultBuildGradle))
+    expect(setGradleCrispDependency(defaultBuildGradle, false)).toMatch(
+      setGradleCrispDependency(
+        setGradleCrispDependency(defaultBuildGradle, false),
+        false
+      )
     );
   });
 });
@@ -45,7 +50,8 @@ describe(setMainConfiguration, (): void => {
       setMainConfiguration(defaultMainApplication, 'TEST_WEBSITE_ID')
     ).toMatch(
       setGradleCrispDependency(
-        setMainConfiguration(defaultMainApplication, 'TEST_WEBSITE_ID')
+        setMainConfiguration(defaultMainApplication, 'TEST_WEBSITE_ID'),
+        false
       )
     );
   });
