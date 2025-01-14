@@ -2,16 +2,29 @@ import {
   withAppBuildGradle,
   withMainApplication,
   withAppDelegate,
+  withAndroidManifest,
   createRunOncePlugin,
   ConfigPlugin,
 } from '@expo/config-plugins';
 
 import { mergeContents } from '@expo/config-plugins/build/utils/generateCode';
 
-const withReactNativeCrisp: ConfigPlugin<{ websiteId?: string }> = (
+const withReactNativeCrisp: ConfigPlugin<{
+  websiteId?: string;
+  notifications?: {
+    enabled: boolean;
+  };
+}> = (
   expoConfig,
-  { websiteId = 'YOUR_WEBSITE_ID' } = {}
+  { websiteId = 'YOUR_WEBSITE_ID', notifications = { enabled: false } } = {}
 ) => {
+  if (notifications.enabled) {
+    expoConfig = withAndroidManifest(expoConfig, (config) => {
+      config.modResults = setAndroidManifestService(config.modResults);
+      return config;
+    });
+  }
+
   withAppDelegate(expoConfig, (modConfig) => {
     if (['objc', 'objcpp'].includes(modConfig.modResults.language)) {
       modConfig.modResults.contents = setAppDelegateImport(
@@ -29,7 +42,8 @@ const withReactNativeCrisp: ConfigPlugin<{ websiteId?: string }> = (
 
   withAppBuildGradle(expoConfig, (modConfig) => {
     modConfig.modResults.contents = setGradleCrispDependency(
-      modConfig.modResults.contents
+      modConfig.modResults.contents,
+      notifications.enabled
     );
 
     return modConfig;
@@ -106,15 +120,32 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
   return result;
 }
 
-export function setGradleCrispDependency(buildGradle: string) {
-  const crispDependency = /implementation 'im.crisp:crisp-sdk:2.0.9'/g;
+export function setGradleCrispDependency(
+  buildGradle: string,
+  notificationsEnabled: boolean
+) {
   let result = buildGradle;
+
+  const crispDependency = /implementation 'im.crisp:crisp-sdk:2.0.9'/g;
+
   if (!result.match(crispDependency)) {
     result = result.replace(
       /dependencies\s?{/,
       `dependencies {
     implementation 'im.crisp:crisp-sdk:2.0.9'`
     );
+  }
+
+  if (notificationsEnabled) {
+    const firebaseMessaging =
+      /implementation 'com.google.firebase:firebase-messaging'/g;
+    if (!result.match(firebaseMessaging)) {
+      result = result.replace(
+        /dependencies\s?{/,
+        `dependencies {
+    implementation 'com.google.firebase:firebase-messaging'`
+      );
+    }
   }
 
   const multiDex = /implementation 'androidx.multidex:multidex:2.0.1'/g;
@@ -136,6 +167,43 @@ export function setGradleCrispDependency(buildGradle: string) {
   }
 
   return result;
+}
+
+export function setAndroidManifestService(androidManifest: any) {
+  const mainApplication = androidManifest.manifest.application[0];
+
+  if (!mainApplication.service) {
+    mainApplication.service = [];
+  }
+
+  const crispService = mainApplication.service.find(
+    (service: any) =>
+      service.$?.['android:name'] ===
+      'im.crisp.client.external.notification.CrispNotificationService'
+  );
+
+  if (!crispService) {
+    mainApplication.service.push({
+      '$': {
+        'android:name':
+          'im.crisp.client.external.notification.CrispNotificationService',
+        'android:exported': 'false',
+      },
+      'intent-filter': [
+        {
+          action: [
+            {
+              $: {
+                'android:name': 'com.google.firebase.MESSAGING_EVENT',
+              },
+            },
+          ],
+        },
+      ],
+    });
+  }
+
+  return androidManifest;
 }
 
 export default createRunOncePlugin(

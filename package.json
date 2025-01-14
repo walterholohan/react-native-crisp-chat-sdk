@@ -1,6 +1,6 @@
 {
   "name": "react-native-crisp-chat-sdk",
-  "version": "0.15.4",
+  "version": "0.15.6",
   "description": "React-Native bridge for Crisp chat iOS and Android SDK&#39;s",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
