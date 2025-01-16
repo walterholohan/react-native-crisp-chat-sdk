@@ -27,7 +27,10 @@ After installing this npm package, add the two [config plugins](https://docs.exp
       [
         "react-native-crisp-chat-sdk",
         {
-          "websiteId": "YOUR_WEBSITE_ID"
+          "websiteId": "YOUR_WEBSITE_ID",
+          "notifications": {
+            "enabled": false
+          }
         }
       ]
     ]
@@ -36,3 +39,36 @@ After installing this npm package, add the two [config plugins](https://docs.exp
 ```
 
 Next, rebuild your app as described in the ["Adding custom native code"](https://docs.expo.io/workflow/customizing/) guide.
+
+## Push Notifications (Optional)
+
+Push notifications can be easily supported. For this update your app `app.json` by enabling `notifications.enabled`.
+
+### Android
+
+Enabling push notifications for Android requires:
+
+1. Placing the `google-services.json` at the root of your Expo project
+2. Configuring server-side settings in the Crisp Dashboard:
+   - Go to Settings > Chatbox Settings > Push Notifications
+   - Enable Android push notifications
+   - Upload your Firebase Server key (found in Firebase Console > Project Settings > Cloud Messaging)
+   - Upload your Firebase Sender ID (found in Firebase Console > Project Settings > Cloud Messaging)
+
+The full procedure is detailed on the [Crisp Developer Hub](https://docs.crisp.chat/guides/chatbox-sdks/android-sdk/#2-enable-push-notifications-in-crisp-dashboard)
+
+Note: Firebase as well as any native code to handle push notifications will be automatically installed by the Crisp React Native Expo Package.
+
+
+### iOS
+Enabling push notifications for iOS requires:
+
+Configuring your Apple Push Notification service (APNs) certificate:
+   - Generate an APNs certificate in your Apple Developer account
+   - Go to Settings > Chatbox Settings > Push Notifications in Crisp Dashboard
+   - Enable iOS push notifications
+   - Upload your APNs certificate (.p8 file)
+
+The full procedure is detailed on the [Crisp Developer Hub](https://docs.crisp.chat/guides/chatbox-sdks/ios-sdk/#5-implement-push-notifications-optional)
+
+Note: Firebase as well as any native code to handle push notifications will be automatically installed by the Crisp React Native Expo Package.

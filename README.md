@@ -7,6 +7,7 @@ React-Native bridge for Crisp chat iOS and Android SDK&#39;s
 ## Features
 
 - iOS & Android Support
+- Push Notifications support
 - Typescript Support
 - [Expo](/plugin/install.md) support with custom dev client
 
@@ -24,22 +25,15 @@ npm install --save react-native-crisp-chat-sdk
 
 ## Expo support
 
-This package is not available in the [Expo Go](https://expo.io/client) app. Learn how you can use it with [custom dev clients](/plugin/install.md).
+This package supports Expo, however, since it's a wrapper on Crisp iOS and Android packages which are native libraries, it is not available in the [Expo Go](https://expo.io/client) app. Using Crisp with Expo is [explained here](/plugin/install.md).
 
 ### iOS Installation
 
-If you're using React Native versions > 60.0, it's relatively straightforward.
+Installing Crisp Native SDK is mandatory:
 
 ```sh
 cd ios && pod install
 ```
-
-For versions below 0.60.0, use rnpm links
-
-- Run `react-native link react-native-crisp-chat-sdk`
-- If linking fails, follow the
-  [manual linking steps](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking)
-
 ### iOS
 
 #### Update your Info.plist
@@ -58,6 +52,17 @@ Your website ID can be found in the Crisp App URL:
 - https://app.crisp.chat/website/[WEBISTE_ID]/inbox/
 
 Crisp Website ID is an UUID like e30a04ee-f81c-4935-b8d8-5fa55831b1c0
+
+## Push Notifications Support
+
+### Expo
+
+When using Expo, push notifications are easy to set up and are covered in detail in the [Expo installation guide](/plugin/install.md#push-notifications-optional).
+
+### React Native CLI
+
+When using React Native CLI, you will need to manually add custom handlers in the Android and iOS packages. The procedures are detailed in the Crisp Developer Hub for both [iOS](https://docs.crisp.chat/guides/chatbox-sdks/ios-sdk/#5-implement-push-notifications-optional) and [Android](https://docs.crisp.chat/guides/chatbox-sdks/android-sdk/#2-enable-push-notifications-in-crisp-dashboard).
+
 
 ## Usage
 
