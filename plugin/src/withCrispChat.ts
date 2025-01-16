@@ -5,6 +5,8 @@ import {
   withAndroidManifest,
   createRunOncePlugin,
   ConfigPlugin,
+  withEntitlementsPlist,
+  withInfoPlist,
 } from '@expo/config-plugins';
 
 import { mergeContents } from '@expo/config-plugins/build/utils/generateCode';
@@ -23,6 +25,22 @@ const withReactNativeCrisp: ConfigPlugin<{
       config.modResults = setAndroidManifestService(config.modResults);
       return config;
     });
+
+    expoConfig = withEntitlementsPlist(expoConfig, (config) => {
+      config.modResults['aps-environment'] = 'production';
+      return config;
+    });
+
+    expoConfig = withInfoPlist(expoConfig, (config) => {
+      config.modResults.UIBackgroundModes =
+        config.modResults.UIBackgroundModes || [];
+      if (
+        !config.modResults.UIBackgroundModes.includes('remote-notification')
+      ) {
+        config.modResults.UIBackgroundModes.push('remote-notification');
+      }
+      return config;
+    });
   }
 
   withAppDelegate(expoConfig, (modConfig) => {
@@ -33,7 +51,8 @@ const withReactNativeCrisp: ConfigPlugin<{
 
       modConfig.modResults.contents = setAppDelegateCall(
         modConfig.modResults.contents,
-        websiteId
+        websiteId,
+        notifications.enabled
       ).contents;
     }
 
@@ -70,16 +89,63 @@ export function setAppDelegateImport(src: string) {
   });
 }
 
-export function setAppDelegateCall(src: string, websiteId: string) {
-  return mergeContents({
+export function setAppDelegateCall(
+  src: string,
+  websiteId: string,
+  notificationsEnabled: boolean
+) {
+  let modifiedSrc = mergeContents({
     tag: 'react-native-crisp-chat-sdk-call',
     src,
-    newSrc: `[CrispSDK configureWithWebsiteID:@"${websiteId}"];`,
+    newSrc: `[CrispSDK configureWithWebsiteID:@"${websiteId}"];${
+      notificationsEnabled
+        ? '\n  [[UIApplication sharedApplication] registerForRemoteNotifications];'
+        : ''
+    }`,
     anchor:
       /- \(BOOL\)application:\(UIApplication \*\)application didFinishLaunchingWithOptions:\(NSDictionary \*\)launchOptions/,
     offset: 2,
     comment: '//',
   });
+
+  if (notificationsEnabled) {
+    // First try to find the existing method
+    const hasExistingMethod = modifiedSrc.contents.includes(
+      '- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken'
+    );
+
+    if (hasExistingMethod) {
+      // If method exists, insert the code inside it
+      modifiedSrc = mergeContents({
+        tag: 'react-native-crisp-chat-sdk-push',
+        src: modifiedSrc.contents,
+        newSrc: `[CrispSDK setDeviceToken:deviceToken];
+
+  return [super application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];`,
+        anchor:
+          /- \(void\)application:\(UIApplication \*\)application didRegisterForRemoteNotificationsWithDeviceToken:\(NSData \*\)deviceToken/,
+        offset: 2,
+        comment: '//',
+      });
+    } else {
+      // If method doesn't exist, add the entire method
+      modifiedSrc = mergeContents({
+        tag: 'react-native-crisp-chat-sdk-push-method',
+        src: modifiedSrc.contents,
+        newSrc: `
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  [CrispSDK setDeviceToken:deviceToken];
+
+  return [super application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}`,
+        anchor: /@end/,
+        offset: 0,
+        comment: '//',
+      });
+    }
+  }
+
+  return modifiedSrc;
 }
 
 export function setMainConfiguration(main: string, websiteId: string) {

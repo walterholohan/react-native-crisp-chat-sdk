@@ -33,7 +33,7 @@ describe(setAppDelegateImport, () => {
 describe(setAppDelegateCall, () => {
   it('add crisp call', () => {
     expect(
-      setAppDelegateCall(defaultAppDelegate, 'TEST_WEBSITE_ID')
+      setAppDelegateCall(defaultAppDelegate, 'TEST_WEBSITE_ID', false)
     ).toMatchSnapshot();
   });
 });
