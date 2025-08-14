@@ -71,7 +71,8 @@ const withReactNativeCrisp: ConfigPlugin<{
   return withMainApplication(expoConfig, (modConfig) => {
     modConfig.modResults.contents = setMainConfiguration(
       modConfig.modResults.contents,
-      websiteId
+      websiteId,
+      notifications.enabled
     );
 
     return modConfig;
@@ -148,7 +149,11 @@ export function setAppDelegateCall(
   return modifiedSrc;
 }
 
-export function setMainConfiguration(main: string, websiteId: string) {
+export function setMainConfiguration(
+  main: string,
+  websiteId: string,
+  notificationsEnabled: boolean
+) {
   const multiDexApp =
     /public class MainApplication extends MultiDexApplication implements ReactApplication {/g;
   let result = main;
@@ -179,8 +184,21 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
       /super\.onCreate\(\);/,
       `super.onCreate();
     Crisp.configure(getApplicationContext(),"${websiteId}");
-`
+    ${notificationsEnabled ? '    Crisp.enableNotifications(getApplicationContext(), true);\n' : ''}`
     );
+  }
+
+  if (notificationsEnabled) {
+    const crispEnableNotifications =
+      /Crisp\.enableNotifications\(getApplicationContext\(\),\s*(true|false)\);/g;
+    if (!main.match(crispEnableNotifications)) {
+      if (main.match(cripWebsiteConfig)) {
+        result = result.replace(
+          /Crisp\.configure\(getApplicationContext\(\),"(\w|\d|-)+"\);/,
+          `$&\n    Crisp.enableNotifications(getApplicationContext(), true);`
+        );
+      }
+    }
   }
 
   return result;

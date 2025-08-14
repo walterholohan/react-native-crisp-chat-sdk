@@ -41,16 +41,22 @@ describe(setAppDelegateCall, () => {
 describe(setMainConfiguration, (): void => {
   it('update MainApplication', (): void => {
     expect(
-      setMainConfiguration(defaultMainApplication, 'TEST_WEBSITE_ID')
+      setMainConfiguration(defaultMainApplication, 'TEST_WEBSITE_ID', false)
+    ).toMatchSnapshot();
+  });
+
+  it('update MainApplication with notifications', (): void => {
+    expect(
+      setMainConfiguration(defaultMainApplication, 'TEST_WEBSITE_ID', true)
     ).toMatchSnapshot();
   });
 
   it('update twice leads to same result', (): void => {
     expect(
-      setMainConfiguration(defaultMainApplication, 'TEST_WEBSITE_ID')
+      setMainConfiguration(defaultMainApplication, 'TEST_WEBSITE_ID', false)
     ).toMatch(
       setGradleCrispDependency(
-        setMainConfiguration(defaultMainApplication, 'TEST_WEBSITE_ID'),
+        setMainConfiguration(defaultMainApplication, 'TEST_WEBSITE_ID', false),
         false
       )
     );
