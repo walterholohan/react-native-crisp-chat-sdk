@@ -105,4 +105,16 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
         crispIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(crispIntent)
     }
+
+     @ReactMethod
+    fun searchHelpdesk() {
+        val context = reactApplicationContext
+        Crisp.searchHelpdesk(context)
+    }
+
+    @ReactMethod
+    fun openHelpdeskArticle(id: String, locale: String, title: String?, category: String?) {
+        val context = reactApplicationContext
+        Crisp.openHelpdeskArticle(context, id, locale, title, category)
+    }
 }
