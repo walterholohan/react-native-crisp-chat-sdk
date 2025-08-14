@@ -15,5 +15,7 @@ RCT_EXTERN_METHOD(setSessionInt:(NSString *)key value:(int)value)
 RCT_EXTERN_METHOD(pushSessionEvent:(NSString *)eventName color:(NSInteger *)color)
 RCT_EXTERN_METHOD(resetSession)
 RCT_EXTERN_METHOD(show)
+RCT_EXTERN_METHOD(searchHelpdesk)
+RCT_EXTERN_METHOD(openHelpdeskArticle:(NSString *)id locale:(NSString *)locale title:(NSString *)title category:(NSString *)category)
 
 @end
