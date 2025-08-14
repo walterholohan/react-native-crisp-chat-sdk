@@ -28,6 +28,13 @@ type CrispChatSdkType = {
   resetSession(): () => void;
   show(): () => void;
   configure(websiteId: string): () => void;
+  searchHelpdesk(): () => void;
+  openHelpdeskArticle(
+    id: string,
+    locale: string,
+    title?: string,
+    category?: string
+  ): () => void;
 };
 
 const CrispChatSdk = NativeModules.CrispChatSdk as CrispChatSdkType;
@@ -95,4 +102,19 @@ export const resetSession = () => {
 
 export const show = () => {
   CrispChatSdk.show();
+};
+
+export const searchHelpdesk = () => {
+  CrispChatSdk.searchHelpdesk();
+  CrispChatSdk.show(); // Search runs on next open → force opening the chat
+};
+
+export const openHelpdeskArticle = (
+  id: string,
+  locale: string,
+  title?: string,
+  category?: string
+) => {
+  CrispChatSdk.openHelpdeskArticle(id, locale, title, category);
+  CrispChatSdk.show(); // Search runs on next open → force opening the chat
 };
