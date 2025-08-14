@@ -210,13 +210,13 @@ export function setGradleCrispDependency(
 ) {
   let result = buildGradle;
 
-  const crispDependency = /implementation 'im.crisp:crisp-sdk:2.0.10'/g;
+  const crispDependency = /implementation 'im.crisp:crisp-sdk:2.0.13'/g;
 
   if (!result.match(crispDependency)) {
     result = result.replace(
       /dependencies\s?{/,
       `dependencies {
-    implementation 'im.crisp:crisp-sdk:2.0.10'`
+    implementation 'im.crisp:crisp-sdk:2.0.13'`
     );
   }
 
