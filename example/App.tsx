@@ -14,6 +14,8 @@ import CrispChat, {
   setUserNickname,
   setUserPhone,
   configure,
+  searchHelpdesk,
+  openHelpdeskArticle,
 } from 'react-native-crisp-chat-sdk';
 
 configure('-JzqEmX56venQuQw4YV8');
@@ -71,6 +73,12 @@ export default function App() {
       </TouchableOpacity>
       <TouchableOpacity onPress={() => resetSession()}>
         <Text>Reset Session</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => searchHelpdesk()}>
+        <Text>Search Helpdesk</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => openHelpdeskArticle('abdcfe', 'fr')}>
+        <Text>Open Helpdesk Article</Text>
       </TouchableOpacity>
       {showChat && <CrispChat />}
     </View>
