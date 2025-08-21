@@ -2,7 +2,7 @@
 
 React-Native bridge for Crisp chat iOS and Android SDK&#39;s
 
-<img src="./screenshot.png" width="375" alt="Crisp screenshot">
+<img src="./assets/crisp_chat.png" width="375" alt="Crisp screenshot">
 
 ## Features
 
@@ -34,6 +34,7 @@ Installing Crisp Native SDK is mandatory:
 ```sh
 cd ios && pod install
 ```
+
 ### iOS
 
 #### Update your Info.plist
@@ -63,7 +64,6 @@ When using Expo, push notifications are easy to set up and are covered in detail
 
 When using React Native CLI, you will need to manually add custom handlers in the Android and iOS packages. The procedures are detailed in the Crisp Developer Hub for both [iOS](https://docs.crisp.chat/guides/chatbox-sdks/ios-sdk/#5-implement-push-notifications-optional) and [Android](https://docs.crisp.chat/guides/chatbox-sdks/android-sdk/#2-enable-push-notifications-in-crisp-dashboard).
 
-
 ## Usage
 
 You can view the [example project](./example/src/App.tsx) for more usage.
@@ -80,7 +80,7 @@ import CrispChat, {
 // ...
 export default function App() {
   // You must set your website ID before calling <CrispChat />
-  configure("YOUR_WEBSITE_ID");
+  configure('YOUR_WEBSITE_ID');
 
   // this should be user ID that way app will load previous user chats
   setUserTokenId('abcd12345');
@@ -96,6 +96,51 @@ export default function App() {
   return <CrispChat />;
 }
 ```
+
+### Helpdesk
+
+Use the Helpdesk APIs to open Crisp Helpdesk directly from your app.
+
+```js
+import {
+  searchHelpdesk,
+  openHelpdeskArticle,
+} from 'react-native-crisp-chat-sdk';
+
+// Open Helpdesk search UI
+searchHelpdesk();
+
+// Open a specific Helpdesk article by slug and locale
+openHelpdeskArticle('my-article-slug', 'en');
+
+// Optionally override title/category displayed by Crisp
+openHelpdeskArticle('my-article-slug', 'fr', 'title', 'category');
+```
+
+#### Finding Article Parameters
+
+To get the required parameters for `openHelpdeskArticle()`, follow these steps in your Crisp workspace:
+
+1. Go to your Crisp web app (SaaS platform)
+2. Navigate to your workspace
+3. Select "Helpdesk" from the sidebar
+4. Choose an article and click the eye icon to view it :
+
+<img src="./assets/openHelpdeskArticle.png" alt="Crisp screenshot">
+
+5. From the article URL, extract the parameters:
+
+For example, with URL: `https://staging.crisp.help/fr/article/test-internal-link-2-6hkgyg/?bust=1755758362140`
+
+- `id`: `6hkgyg` (the article slug at the end)
+- `locale`: `fr` (the language code in the URL path)
+- `title`: Optional - custom title to display (defaults to article's actual title)
+- `category`: Optional - custom category to display (defaults to article's actual category)
+
+#### Notes
+
+- Both functions will automatically open the chat UI if it is not already open.
+- `openHelpdeskArticle(id, locale, title?, category?)` expects the article slug as `id` and an IETF language tag for `locale` (e.g. `en`, `fr`).
 
 ## Language management
 
@@ -133,6 +178,8 @@ displayed in english. If `localeIdentifier: fr_FR` appears in your Xcode logs, i
 - `CrispChatSDK.setSessionInt('key', 'value')`
 - `CrispChatSDK.resetSession()`
 - `CrispChatSDK.configure('YOUR_WEBSITE_ID')`
+- `CrispChatSDK.searchHelpdesk()`
+- `CrispChatSDK.openHelpdeskArticle(id: string, locale: string, title?: string, category?: string)`
 
 ## Contributing
 

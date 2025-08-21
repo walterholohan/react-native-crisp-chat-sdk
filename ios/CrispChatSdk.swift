@@ -75,6 +75,16 @@ class CrispChatSdk: NSObject {
         }
     }
 
+     @objc
+    func searchHelpdesk() {
+        CrispSDK.searchHelpdesk()
+    }
+
+    @objc
+    func openHelpdeskArticle(_ id : String, locale: String, title: String?, category: String?) {
+        CrispSDK.openHelpdeskArticle(locale: locale, slug: id, title: title, category: category)
+    }
+
     @objc
     static func requiresMainQueueSetup() -> Bool {
         return true
