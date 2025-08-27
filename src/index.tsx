@@ -15,7 +15,7 @@ export enum CrispSessionEventColors {
 }
 
 type CrispChatSdkType = {
-  setTokenId(id: string): () => void;
+  setTokenId(id: string | null): () => void;
   setUserEmail(email: string): () => void;
   setUserNickname(name: string): () => void;
   setUserPhone(phone: string): () => void;
@@ -35,6 +35,7 @@ type CrispChatSdkType = {
     title?: string,
     category?: string
   ): () => void;
+  logCache(): () => void;
 };
 
 const CrispChatSdk = NativeModules.CrispChatSdk as CrispChatSdkType;
@@ -53,7 +54,7 @@ export const configure = (websiteId: string) => {
   CrispChatSdk.configure(String(websiteId));
 };
 
-export const setTokenId = (id: string) => {
+export const setTokenId = (id: string | null) => {
   CrispChatSdk.setTokenId(String(id));
 };
 
@@ -117,4 +118,8 @@ export const openHelpdeskArticle = (
 ) => {
   CrispChatSdk.openHelpdeskArticle(id, locale, title, category);
   CrispChatSdk.show(); // Search runs on next open → force opening the chat
+};
+
+export const logCache = () => {
+  CrispChatSdk.logCache();
 };
