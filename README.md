@@ -68,6 +68,21 @@ When using React Native CLI, you will need to manually add custom handlers in th
 
 You can view the [example project](./example/src/App.tsx) for more usage.
 
+### Important Notes on Token Management
+
+**setTokenId should be called before the chat has been presented.** If you want to change the token after the chat has been presented, you need to call `resetSession()` for the new token to come into effect.
+
+**When users logout from their account in your app, make sure to clear the token by calling `setTokenId(null)` and then reset their local session by calling `resetSession()`.** This will not destroy the remote session with Crisp, it will only unbind the app from it. This session will be recovered when the user logs in again to their account, via their token.
+
+**Example of logout handling:**
+```js
+const userLogout = () => {
+  // Execute this sequence when your users are logging out
+  setTokenId(null);        // 1. Clear the token value
+  resetSession();          // 2. Unbind the current session
+};
+```
+
 ```js
 import CrispChat, {
   configure,
@@ -83,14 +98,14 @@ export default function App() {
   configure('YOUR_WEBSITE_ID');
 
   // this should be user ID that way app will load previous user chats
-  setUserTokenId('abcd12345');
+  setTokenId('abcd12345');
 
   // Set user's info
   setUserEmail('test@test.com');
   setUserNickname('John Smith');
   setUserPhone('+614430231224');
 
-  // Call session reset when user loggs out
+  // Call session reset when user logs out
   resetSession();
 
   return <CrispChat />;
@@ -163,10 +178,10 @@ AppDelegate.m file : `NSLog(@"localeIdentifier: %@", [[NSLocale currentLocale] l
 If for example, `localeIdentifier: en_FR` or `localeIdentifier: en_US` appears in your Xcode logs, then Crisp will be
 displayed in english. If `localeIdentifier: fr_FR` appears in your Xcode logs, it will be displayed in french.
 
-## Availables APIs:
+## Available APIs:
 
 - `CrispChatSDK.show()`
-- `CrispChatSDK.setTokenId('userID/GUID')`
+- `CrispChatSDK.setTokenId('userID/GUID')` - **Must be called before chat is presented**
 - `CrispChatSDK.pushSessionEvent(name: "Signup", color: CrispSessionEventColors.blue)`
 - `CrispChatSDK.setUserEmail('test@test.com')`
 - `CrispChatSDK.setUserNickname('John Doe')`
@@ -176,7 +191,7 @@ displayed in english. If `localeIdentifier: fr_FR` appears in your Xcode logs, i
 - `CrispChatSDK.setSessionString('key', 'value')`
 - `CrispChatSDK.setSessionBool('key', 'value')`
 - `CrispChatSDK.setSessionInt('key', 'value')`
-- `CrispChatSDK.resetSession()`
+- `CrispChatSDK.resetSession()` - **Use after logout or when changing tokens**
 - `CrispChatSDK.configure('YOUR_WEBSITE_ID')`
 - `CrispChatSDK.searchHelpdesk()`
 - `CrispChatSDK.openHelpdeskArticle(id: string, locale: string, title?: string, category?: string)`
