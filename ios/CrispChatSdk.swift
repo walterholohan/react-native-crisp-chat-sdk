@@ -9,8 +9,8 @@ class CrispChatSdk: NSObject {
     }
 
     @objc
-    func setTokenId(_ id: String) {
-        CrispSDK.setTokenID(tokenID: id)
+    func setTokenId(_ tokenID: String?) {
+        CrispSDK.setTokenID(tokenID : tokenID)
     }
 
     @objc
