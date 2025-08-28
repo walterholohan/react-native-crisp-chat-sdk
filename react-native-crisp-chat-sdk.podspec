@@ -20,5 +20,5 @@ Pod::Spec.new do |s|
   s.dependency "React"
 
   # Crisp dependency
-  s.dependency "Crisp", "2.8.2"
+  s.dependency "Crisp", "2.9.0"
 end
