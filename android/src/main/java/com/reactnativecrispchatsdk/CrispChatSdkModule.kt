@@ -1,7 +1,6 @@
 package com.reactnativecrispchatsdk
 
 import android.content.Intent
-import android.util.Log
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
@@ -10,7 +9,6 @@ import im.crisp.client.external.ChatActivity
 import im.crisp.client.external.Crisp
 import im.crisp.client.external.data.SessionEvent
 import im.crisp.client.external.data.SessionEvent.Color
-import im.crisp.client.external.Logger
 
 
 class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
@@ -26,13 +24,9 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
     }
 
     @ReactMethod
-    fun setTokenId(id: String?){
-        Log.d("CrispChatSdkModule", "setTokenId: $id")
+    fun setTokenId(tokenId: String?){
         val context = reactApplicationContext
-        when (id) {
-            "null" -> Crisp.setTokenID(context, null)
-            else -> Crisp.setTokenID(context, id)
-        }
+        Crisp.setTokenID(context, tokenId)
     }
 
     @ReactMethod
@@ -122,10 +116,5 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
     fun openHelpdeskArticle(id: String, locale: String, title: String?, category: String?) {
         val context = reactApplicationContext
         Crisp.openHelpdeskArticle(context, id, locale, title, category)
-    }
-
-    @ReactMethod
-    fun setLogLevel() {
-        Crisp.setLogLevel(Logger.Level.DEBUG)
     }
 }

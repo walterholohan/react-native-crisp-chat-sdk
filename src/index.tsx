@@ -15,7 +15,7 @@ export enum CrispSessionEventColors {
 }
 
 type CrispChatSdkType = {
-  setTokenId(id: string | null): () => void;
+  setTokenId(tokenId: string | null): () => void;
   setUserEmail(email: string): () => void;
   setUserNickname(name: string): () => void;
   setUserPhone(phone: string): () => void;
@@ -54,8 +54,8 @@ export const configure = (websiteId: string) => {
   CrispChatSdk.configure(String(websiteId));
 };
 
-export const setTokenId = (id: string | null) => {
-  CrispChatSdk.setTokenId(String(id));
+export const setTokenId = (tokenId: string | null) => {
+  CrispChatSdk.setTokenId(tokenId);
 };
 
 export const setUserEmail = (email: string) => {
