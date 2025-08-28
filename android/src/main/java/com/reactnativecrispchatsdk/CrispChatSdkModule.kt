@@ -24,16 +24,16 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
     }
 
     @ReactMethod
-    fun setTokenId(id: String){
-        try {
-          Crisp.setTokenID(reactApplicationContext, id)
-        } catch(error : Exception) { }
+    fun setTokenId(tokenId: String?){
+        val context = reactApplicationContext
+        Crisp.setTokenID(context, tokenId)
     }
 
     @ReactMethod
     fun setUserEmail(email: String) {
         Crisp.setUserEmail(email)
     }
+
     @ReactMethod
     fun setUserNickname(name: String) {
         Crisp.setUserNickname(name)
