@@ -70,6 +70,17 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
     }
 
     @ReactMethod
+    fun getSessionIdentifier(promise: Promise){
+        try {
+            val context = reactApplicationContext
+            val identifier = Crisp.getSessionIdentifier(context)
+            promise.resolve(identifier)
+        } catch (e: Throwable) {
+            promise.reject("Create Event Error", e)
+        }
+    }
+
+    @ReactMethod
     fun pushSessionEvent(name: String, color: Int){
       var sessionEventColor: Color = Color.BLACK
 

@@ -10,7 +10,7 @@ class CrispChatSdk: NSObject {
 
     @objc
     func setTokenId(_ tokenID: String?) {
-        CrispSDK.setTokenID(tokenID : tokenID)
+        CrispSDK.setTokenID(tokenID: tokenID)
     }
 
     @objc
@@ -53,6 +53,18 @@ class CrispChatSdk: NSObject {
     }
 
     @objc
+    func getSessionIdentifier(
+        _ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock
+    ) {
+        let sessionIdentifier = CrispSDK.session.identifier
+        if let identifier = sessionIdentifier {
+            resolve(identifier)
+        } else {
+            resolve(NSNull())
+        }
+    }
+
+    @objc
     func pushSessionEvent(_ eventName: String, color: Crisp.SessionEventColor) {
         CrispSDK.session.pushEvent(Crisp.SessionEvent(name: eventName, color: color))
     }
@@ -75,13 +87,13 @@ class CrispChatSdk: NSObject {
         }
     }
 
-     @objc
+    @objc
     func searchHelpdesk() {
         CrispSDK.searchHelpdesk()
     }
 
     @objc
-    func openHelpdeskArticle(_ id : String, locale: String, title: String?, category: String?) {
+    func openHelpdeskArticle(_ id: String, locale: String, title: String?, category: String?) {
         CrispSDK.openHelpdeskArticle(locale: locale, slug: id, title: title, category: category)
     }
 
