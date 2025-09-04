@@ -75,11 +75,12 @@ You can view the [example project](./example/src/App.tsx) for more usage.
 **When users logout from their account in your app, make sure to clear the token by calling `setTokenId(null)` and then reset their local session by calling `resetSession()`.** This will not destroy the remote session with Crisp, it will only unbind the app from it. This session will be recovered when the user logs in again to their account, via their token.
 
 **Example of logout handling:**
+
 ```js
 const userLogout = () => {
   // Execute this sequence when your users are logging out
-  setTokenId(null);        // 1. Clear the token value
-  resetSession();          // 2. Unbind the current session
+  setTokenId(null); // 1. Clear the token value
+  resetSession(); // 2. Unbind the current session
 };
 ```
 
@@ -90,6 +91,7 @@ import CrispChat, {
   setUserNickname,
   setUserPhone,
   resetSession,
+  getSessionIdentifier,
 } from 'react-native-crisp-chat-sdk';
 
 // ...
@@ -105,12 +107,50 @@ export default function App() {
   setUserNickname('John Smith');
   setUserPhone('+614430231224');
 
+  // Get current session identifier (returns null if session not yet loaded)
+  const sessionId = await getSessionIdentifier();
+  console.log('Current session ID:', sessionId);
+
   // Call session reset when user logs out
   resetSession();
 
   return <CrispChat />;
 }
 ```
+
+### Session Management
+
+#### Getting Session Identifier
+
+You can retrieve the current session identifier to track user sessions or for analytics purposes:
+
+```js
+import { getSessionIdentifier } from 'react-native-crisp-chat-sdk';
+
+// Get current session identifier
+const getCurrentSession = async () => {
+  try {
+    const sessionId = await getSessionIdentifier();
+    if (sessionId) {
+      console.log('Current session ID:', sessionId);
+      // Session is loaded and active
+    } else {
+      console.log('No active session yet');
+      // Session not yet loaded (normal state)
+    }
+  } catch (error) {
+    console.error('Error getting session identifier:', error);
+    // Handle actual errors (network issues, etc.)
+  }
+};
+```
+
+**Important Notes:**
+
+- Returns `null` when the session is not yet loaded (normal state)
+- Returns a string identifier when the session is active
+- Throws an error only for actual problems (network issues, etc.)
+- The session identifier is unique per user session
 
 ### Helpdesk
 
@@ -191,6 +231,7 @@ displayed in english. If `localeIdentifier: fr_FR` appears in your Xcode logs, i
 - `CrispChatSDK.setSessionString('key', 'value')`
 - `CrispChatSDK.setSessionBool('key', 'value')`
 - `CrispChatSDK.setSessionInt('key', 'value')`
+- `CrispChatSDK.getSessionIdentifier()` - **Returns Promise<string | null>**
 - `CrispChatSDK.resetSession()` - **Use after logout or when changing tokens**
 - `CrispChatSDK.configure('YOUR_WEBSITE_ID')`
 - `CrispChatSDK.searchHelpdesk()`

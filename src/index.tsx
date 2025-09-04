@@ -24,6 +24,7 @@ type CrispChatSdkType = {
   setSessionString(key: string, value: string): () => void;
   setSessionBool(key: string, value: boolean): () => void;
   setSessionInt(key: string, value: number): () => void;
+  getSessionIdentifier(): Promise<string | null>;
   pushSessionEvent(name: string, color: CrispSessionEventColors): () => void;
   resetSession(): () => void;
   show(): () => void;
@@ -35,7 +36,6 @@ type CrispChatSdkType = {
     title?: string,
     category?: string
   ): () => void;
-  logCache(): () => void;
 };
 
 const CrispChatSdk = NativeModules.CrispChatSdk as CrispChatSdkType;
@@ -90,6 +90,15 @@ export const setSessionInt = (key: string, value: number) => {
   CrispChatSdk.setSessionInt(String(key), Number(value));
 };
 
+export async function getSessionIdentifier() {
+  try {
+    const sessionIdentifier = await CrispChatSdk.getSessionIdentifier();
+    return sessionIdentifier;
+  } catch (e) {
+    throw e;
+  }
+}
+
 export const pushSessionEvent = (
   name: string,
   color: CrispSessionEventColors
@@ -118,8 +127,4 @@ export const openHelpdeskArticle = (
 ) => {
   CrispChatSdk.openHelpdeskArticle(id, locale, title, category);
   CrispChatSdk.show(); // Search runs on next open → force opening the chat
-};
-
-export const logCache = () => {
-  CrispChatSdk.logCache();
 };
