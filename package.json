@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
+    "@expo/config-plugins": "^9.0.0",
     "@react-native-community/eslint-config": "^3.2.0",
     "@react-native/babel-preset": "0.74.86",
     "@react-native/eslint-config": "0.74.86",
@@ -73,14 +74,16 @@
     "react-native-builder-bob": "^0.23.2",
     "release-it": "^19.0.4",
     "typescript": "5.0.4",
-    "@expo/config-plugins": "^9.0.0",
-    "@types/react": "^18.2.0"
+    "react-native": "0.79.5",
+    "react": "19.0.0",
+    "@types/react": "19.0.10"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*",
+    "@expo/config-plugins": "*",
     "expo": "*",
-    "@expo/config-plugins": "*"
+    "react": "*",
+    "@types/react": "*",
+    "react-native": "*"
   },
   "jest": {
     "preset": "react-native",
