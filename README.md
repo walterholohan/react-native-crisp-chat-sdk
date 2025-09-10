@@ -90,6 +90,7 @@ import CrispChat, {
   setUserEmail,
   setUserNickname,
   setUserPhone,
+  setUserCompany,
   resetSession,
   getSessionIdentifier,
 } from 'react-native-crisp-chat-sdk';
@@ -107,6 +108,21 @@ export default function App() {
   setUserNickname('John Smith');
   setUserPhone('+614430231224');
 
+  // Set user's company information
+  setUserCompany({
+    name: 'Acme Corporation',
+    url: 'https://acme.com',
+    companyDescription: 'Best company in the world',
+    employment: {
+      title: 'Software Engineer',
+      role: 'Developer'
+    },
+    geolocation: {
+      city: 'Paris',
+      country: 'FR'  // ⚠️ Use country codes (FR, US, DE, etc), not full names
+    }
+  });
+
   // Get current session identifier (returns null if session not yet loaded)
   const sessionId = await getSessionIdentifier();
   console.log('Current session ID:', sessionId);
@@ -117,6 +133,54 @@ export default function App() {
   return <CrispChat />;
 }
 ```
+
+### User Company Information
+
+You can set detailed company information for users, including employment details and geolocation:
+
+```js
+import { setUserCompany } from 'react-native-crisp-chat-sdk';
+
+setUserCompany({
+  name: 'Acme Corporation', // Required: Company name
+  url: 'https://acme.com', // Optional: Company website
+  companyDescription: 'Best company ever', // Optional: Company description
+  employment: {
+    // Optional: User's employment info
+    title: 'Software Engineer',
+    role: 'Senior Developer',
+  },
+  geolocation: {
+    // Optional: Company location
+    city: 'San Francisco',
+    country: 'US', // ⚠️ Use country codes (US, FR, etc), not full names
+  },
+});
+```
+
+Type definitions available to developers:
+
+```ts
+export interface Employment {
+  title?: string;
+  role?: string;
+}
+
+export interface Geolocation {
+  country?: string; // ⚠️ Must be country code (US, FR, DE, etc), not full country name
+  city?: string;
+}
+
+export interface Company {
+  name: string;
+  url?: string;
+  companyDescription?: string;
+  employment?: Employment;
+  geolocation?: Geolocation;
+}
+```
+
+**⚠️ Important:** For the `country` field in `geolocation`, use **country codes** (ISO 3166-1 alpha-2 format) like `"US"`, `"FR"`, `"DE"`, etc. Full country names like `"France"` or `"United States"` will not work.
 
 ### Session Management
 
@@ -226,6 +290,7 @@ displayed in english. If `localeIdentifier: fr_FR` appears in your Xcode logs, i
 - `CrispChatSDK.setUserEmail('test@test.com')`
 - `CrispChatSDK.setUserNickname('John Doe')`
 - `CrispChatSDK.setUserPhone('003370123456789')`
+- `CrispChatSDK.setUserCompany(company: Company)` - **Set user company information**
 - `CrispChatSDK.setUserAvatar('https://pbs.twimg.com/profile_images/782474226020200448/zDo-gAo0_400x400.jpg')`
 - `CrispChatSDK.setSessionSegment('segment')`
 - `CrispChatSDK.setSessionString('key', 'value')`
