@@ -4,7 +4,7 @@
 
 RCT_EXTERN_METHOD(configure:(NSString *)websiteId)
 RCT_EXTERN_METHOD(setTokenId:(NSString * _Nullable)tokenID) 
-RCT_EXTERN_METHOD(setUserEmail:(NSString *)email)
+RCT_EXTERN_METHOD(setUserEmail:(NSString *)email signature:(NSString * _Nullable)signature)
 RCT_EXTERN_METHOD(setUserNickname:(NSString *)nickname)
 RCT_EXTERN_METHOD(setUserPhone:(NSString *)phone)
 RCT_EXTERN_METHOD(setUserCompany:(NSDictionary *)companyData)
