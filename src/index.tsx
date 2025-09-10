@@ -34,7 +34,7 @@ export interface Company {
 
 type CrispChatSdkType = {
   setTokenId(tokenId: string | null): () => void;
-  setUserEmail(email: string): () => void;
+  setUserEmail(email: string, signature: string | null): () => void;
   setUserNickname(name: string): () => void;
   setUserPhone(phone: string): () => void;
   setUserCompany(company: Company): () => void;
@@ -77,8 +77,8 @@ export const setTokenId = (tokenId: string | null) => {
   CrispChatSdk.setTokenId(tokenId);
 };
 
-export const setUserEmail = (email: string) => {
-  CrispChatSdk.setUserEmail(String(email));
+export const setUserEmail = (email: string, signature: string | null) => {
+  CrispChatSdk.setUserEmail(String(email), signature);
 };
 
 export const setUserNickname = (name: string) => {
