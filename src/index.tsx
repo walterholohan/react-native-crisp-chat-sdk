@@ -14,11 +14,30 @@ export enum CrispSessionEventColors {
   BLACK = 9,
 }
 
+export interface Employment {
+  title?: string;
+  role?: string;
+}
+
+export interface Geolocation {
+  country?: string;
+  city?: string;
+}
+
+export interface Company {
+  name: string;
+  url?: string;
+  companyDescription?: string;
+  employment?: Employment;
+  geolocation?: Geolocation;
+}
+
 type CrispChatSdkType = {
   setTokenId(tokenId: string | null): () => void;
   setUserEmail(email: string): () => void;
   setUserNickname(name: string): () => void;
   setUserPhone(phone: string): () => void;
+  setUserCompany(company: Company): () => void;
   setUserAvatar(url: string): () => void;
   setSessionSegment(segment: string): () => void;
   setSessionString(key: string, value: string): () => void;
@@ -68,6 +87,10 @@ export const setUserNickname = (name: string) => {
 
 export const setUserPhone = (phone: string) => {
   CrispChatSdk.setUserPhone(String(phone));
+};
+
+export const setUserCompany = (company: Company) => {
+  CrispChatSdk.setUserCompany(company);
 };
 
 export const setUserAvatar = (url: string) => {
