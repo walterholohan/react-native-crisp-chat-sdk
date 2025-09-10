@@ -104,7 +104,7 @@ export default function App() {
   setTokenId('abcd12345');
 
   // Set user's info
-  setUserEmail('test@test.com');
+  setUserEmail('test@test.com', null);
   setUserNickname('John Smith');
   setUserPhone('+614430231224');
 
@@ -181,6 +181,12 @@ export interface Company {
 ```
 
 **⚠️ Important:** For the `country` field in `geolocation`, use **country codes** (ISO 3166-1 alpha-2 format) like `"US"`, `"FR"`, `"DE"`, etc. Full country names like `"France"` or `"United States"` will not work.
+
+### Identity Verification
+
+Identity verification is supported. To use it, follow the official Crisp documentation and pass the backend-generated signature as the second parameter to `setUserEmail(email, signature)`.
+
+Official docs: https://docs.crisp.chat/guides/chatbox-sdks/web-sdk/identity-verification/
 
 ### Session Management
 
@@ -287,7 +293,7 @@ displayed in english. If `localeIdentifier: fr_FR` appears in your Xcode logs, i
 - `CrispChatSDK.show()`
 - `CrispChatSDK.setTokenId('userID/GUID')` - **Must be called before chat is presented**
 - `CrispChatSDK.pushSessionEvent(name: "Signup", color: CrispSessionEventColors.blue)`
-- `CrispChatSDK.setUserEmail('test@test.com')`
+- `CrispChatSDK.setUserEmail('test@test.com', null)` - **Identity verification signature is optional**
 - `CrispChatSDK.setUserNickname('John Doe')`
 - `CrispChatSDK.setUserPhone('003370123456789')`
 - `CrispChatSDK.setUserCompany(company: Company)` - **Set user company information**
