@@ -28,6 +28,42 @@ class CrispChatSdk: NSObject {
     }
 
     @objc
+    func setUserCompany(_ companyData: [String: Any]) {
+        let companyName: String? = companyData["name"] as? String
+        
+        var companyUrl: URL? = nil
+        if let urlString: String = companyData["url"] as? String, !urlString.isEmpty {
+            companyUrl = URL(string: urlString)
+        }
+        
+        let companyDescription: String? = companyData["companyDescription"] as? String
+        
+        var employment: Employment? = nil
+        if let employmentData: [String : Any] = companyData["employment"] as? [String: Any] {
+            let title: String? = employmentData["title"] as? String
+            let role: String? = employmentData["role"] as? String
+            employment = Employment(title: title, role: role)
+        }
+        
+        var geolocation: Geolocation? = nil
+        if let geolocationData: [String : Any] = companyData["geolocation"] as? [String: Any] {
+            let city: String? = geolocationData["city"] as? String
+            let country: String? = geolocationData["country"] as? String
+            geolocation = Geolocation(city: city, country: country)
+        }
+        
+        let company = Company(
+            name: companyName,
+            url: companyUrl,
+            companyDescription: companyDescription,
+            employment: employment,
+            geolocation: geolocation
+        )
+        
+        CrispSDK.user.company = company
+    }
+
+    @objc
     func setUserAvatar(_ url: String) {
         CrispSDK.user.avatar = URL(string: url)
     }
