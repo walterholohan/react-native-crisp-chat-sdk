@@ -34,8 +34,8 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
     }
 
     @ReactMethod
-    fun setUserEmail(email: String) {
-        Crisp.setUserEmail(email)
+    fun setUserEmail(email: String, signature: String?) {
+        Crisp.setUserEmail(email, signature)
     }
 
     @ReactMethod
