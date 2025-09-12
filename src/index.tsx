@@ -40,6 +40,7 @@ type CrispChatSdkType = {
   setUserCompany(company: Company): () => void;
   setUserAvatar(url: string): () => void;
   setSessionSegment(segment: string): () => void;
+  setSessionSegments(segments: string[], overwrite?: boolean): () => void;
   setSessionString(key: string, value: string): () => void;
   setSessionBool(key: string, value: boolean): () => void;
   setSessionInt(key: string, value: number): () => void;
@@ -99,6 +100,10 @@ export const setUserAvatar = (url: string) => {
 
 export const setSessionSegment = (segment: string) => {
   CrispChatSdk.setSessionSegment(String(segment));
+};
+
+export const setSessionSegments = (segments: string[], overwrite?: boolean) => {
+  CrispChatSdk.setSessionSegments(segments, overwrite ?? false);
 };
 
 export const setSessionString = (key: string, value: string) => {
