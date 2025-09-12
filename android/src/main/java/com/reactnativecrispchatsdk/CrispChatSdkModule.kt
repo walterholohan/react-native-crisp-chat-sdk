@@ -6,6 +6,7 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.bridge.ReadableArray
 import im.crisp.client.external.ChatActivity
 import im.crisp.client.external.Crisp
 import im.crisp.client.external.data.SessionEvent
@@ -93,6 +94,15 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
     @ReactMethod
     fun setSessionSegment(segment: String){
         Crisp.setSessionSegment(segment)
+    }
+
+    @ReactMethod
+    fun setSessionSegments(segments: ReadableArray, overwrite: Boolean){
+        val segmentsList = mutableListOf<String>()
+        for (i in 0 until segments.size()) {
+            segmentsList.add(segments.getString(i) ?: "")
+        }
+        Crisp.setSessionSegments(segmentsList, overwrite)
     }
 
     @ReactMethod
