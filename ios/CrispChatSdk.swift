@@ -74,6 +74,12 @@ class CrispChatSdk: NSObject {
     }
 
     @objc
+    func setSessionSegments(_ segments: NSArray, overwrite: Bool) {
+        let segmentsArray = segments.compactMap { $0 as? String }
+        CrispSDK.session.setSegments(segmentsArray, overwrite: overwrite)
+    }
+
+    @objc
     func setSessionString(_ key: String, value: String) {
         CrispSDK.session.setString(value, forKey: key)
     }
