@@ -104,7 +104,7 @@ export default function App() {
   setTokenId('abcd12345');
 
   // Set user's info
-  setUserEmail('test@test.com', null);
+  setUserEmail('test@test.com'); // Without identity verification
   setUserNickname('John Smith');
   setUserPhone('+614430231224');
 
@@ -184,7 +184,19 @@ export interface Company {
 
 ### Identity Verification
 
-Identity verification is supported. To use it, follow the official Crisp documentation and pass the backend-generated signature as the second parameter to `setUserEmail(email, signature)`.
+Identity verification is supported. You can set a user's email with or without verification:
+
+```js
+import { setUserEmail } from 'react-native-crisp-chat-sdk';
+
+// Without identity verification (simple case)
+setUserEmail('user@example.com');
+
+// With identity verification (secure case)
+setUserEmail('user@example.com', 'backend-generated-signature');
+```
+
+To use identity verification, follow the official Crisp documentation and pass the backend-generated signature as the second parameter.
 
 Official docs: https://docs.crisp.chat/guides/chatbox-sdks/web-sdk/identity-verification/
 
@@ -293,7 +305,8 @@ displayed in english. If `localeIdentifier: fr_FR` appears in your Xcode logs, i
 - `CrispChatSDK.show()`
 - `CrispChatSDK.setTokenId('userID/GUID')` - **Must be called before chat is presented**
 - `CrispChatSDK.pushSessionEvent(name: "Signup", color: CrispSessionEventColors.blue)`
-- `CrispChatSDK.setUserEmail('test@test.com', null)` - **Identity verification signature is optional**
+- `CrispChatSDK.setUserEmail('test@test.com')` - **Identity verification signature is optional**
+- `CrispChatSDK.setUserEmail('test@test.com', 'signature')` - **With identity verification**
 - `CrispChatSDK.setUserNickname('John Doe')`
 - `CrispChatSDK.setUserPhone('003370123456789')`
 - `CrispChatSDK.setUserCompany(company: Company)` - **Set user company information**
