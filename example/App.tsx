@@ -35,7 +35,7 @@ export default function App() {
       <TouchableOpacity onPress={() => setTokenId('123456789')}>
         <Text>Set Token Id</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => setUserEmail('test@test.com')}>
+      <TouchableOpacity onPress={() => setUserEmail('test@test.com', null)}>
         <Text>Set User Email</Text>
       </TouchableOpacity>
       <TouchableOpacity

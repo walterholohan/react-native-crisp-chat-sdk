@@ -13,9 +13,10 @@ class CrispChatSdk: NSObject {
         CrispSDK.setTokenID(tokenID: tokenID)
     }
 
-    @objc
-    func setUserEmail(_ email: String) {
+     @objc
+    func setUserEmail(_ email: String, signature: String?) {
         CrispSDK.user.email = email
+        CrispSDK.user.signature = signature
     }
 
     @objc
