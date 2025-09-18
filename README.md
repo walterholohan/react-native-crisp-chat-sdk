@@ -91,6 +91,7 @@ import CrispChat, {
   setUserNickname,
   setUserPhone,
   setUserCompany,
+  setSessionSegments,
   resetSession,
   getSessionIdentifier,
 } from 'react-native-crisp-chat-sdk';
@@ -122,6 +123,8 @@ export default function App() {
       country: 'FR'  // ⚠️ Use country codes (FR, US, DE, etc), not full names
     }
   });
+  // Set session segments
+  setSessionSegments(['premium', 'mobile']);
 
   // Get current session identifier (returns null if session not yet loaded)
   const sessionId = await getSessionIdentifier();
@@ -183,6 +186,41 @@ export interface Company {
 **⚠️ Important:** For the `country` field in `geolocation`, use **country codes** (ISO 3166-1 alpha-2 format) like `"US"`, `"FR"`, `"DE"`, etc. Full country names like `"France"` or `"United States"` will not work.
 
 ### Session Management
+
+#### Setting Session Segments
+
+You can set multiple session segments to categorize user sessions. Segments help organize and filter conversations in your Crisp dashboard.
+
+```js
+import {
+  setSessionSegments,
+  setSessionSegment,
+} from 'react-native-crisp-chat-sdk';
+
+// Set multiple segments at once
+setSessionSegments(['premium', 'mobile', 'ios']);
+
+// Set multiple segments with overwrite (replaces existing segments)
+setSessionSegments(['vip', 'web'], true);
+
+// Set a single segment (adds to existing segments)
+setSessionSegment('trial');
+```
+
+**About the `overwrite` parameter:**
+
+- `overwrite: false` (default) - Adds new segments to existing ones
+- `overwrite: true` - Replaces all existing segments with the new ones
+
+**Example scenarios:**
+
+```js
+// User upgrades to premium
+setSessionSegments(['premium', 'mobile'], true); // Replaces all segments
+
+// User completes onboarding
+setSessionSegments(['onboarded']); // Adds to existing segments
+```
 
 #### Getting Session Identifier
 
@@ -293,6 +331,7 @@ displayed in english. If `localeIdentifier: fr_FR` appears in your Xcode logs, i
 - `CrispChatSDK.setUserCompany(company: Company)` - **Set user company information**
 - `CrispChatSDK.setUserAvatar('https://pbs.twimg.com/profile_images/782474226020200448/zDo-gAo0_400x400.jpg')`
 - `CrispChatSDK.setSessionSegment('segment')`
+- `CrispChatSDK.setSessionSegments(['segment1', 'segment2'], overwrite?: boolean)`
 - `CrispChatSDK.setSessionString('key', 'value')`
 - `CrispChatSDK.setSessionBool('key', 'value')`
 - `CrispChatSDK.setSessionInt('key', 'value')`
