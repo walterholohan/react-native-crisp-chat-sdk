@@ -602,7 +602,7 @@ android {
 
 dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'im.crisp:crisp-sdk:2.0.13'
+    implementation 'im.crisp:crisp-sdk:2.0.14'
     implementation fileTree(dir: \\"libs\\", include: [\\"*.jar\\"])
 
     //noinspection GradleDynamicVersion
