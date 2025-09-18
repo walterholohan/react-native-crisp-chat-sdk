@@ -80,7 +80,7 @@ class CrispChatSdk: NSObject {
 
     @objc
     func setSessionBool(_ key: String, value: Bool) {
-        CrispSDK.session.setString(String(value), forKey: key)
+        CrispSDK.session.setBool(value, forKey: key)
     }
 
     @objc
