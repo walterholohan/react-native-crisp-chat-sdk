@@ -8,7 +8,7 @@ First install the package with yarn, npm, or with [`expo-cli`](https://docs.expo
 expo install react-native-crisp-chat-sdk expo-build-properties
 ```
 
-`expo-build-properties` is needed to set ios `deploymentTarget` to `13.0` which is the minimum version required by crisp sdk
+`expo-build-properties` is needed to set ios `deploymentTarget` to `15.1` which is the minimum version required by crisp sdk
 
 After installing this npm package, add the two [config plugins](https://docs.expo.io/guides/config-plugins/) to the [`plugins`](https://docs.expo.io/versions/latest/config/app/#plugins) array of your `app.json` or `app.config.js`:
 
@@ -20,7 +20,7 @@ After installing this npm package, add the two [config plugins](https://docs.exp
         "expo-build-properties",
         {
           "ios": {
-            "deploymentTarget": "13.0"
+            "deploymentTarget": "15.1"
           }
         }
       ],
@@ -59,15 +59,16 @@ The full procedure is detailed on the [Crisp Developer Hub](https://docs.crisp.c
 
 Note: Firebase as well as any native code to handle push notifications will be automatically installed by the Crisp React Native Expo Package.
 
-
 ### iOS
+
 Enabling push notifications for iOS requires:
 
 Configuring your Apple Push Notification service (APNs) certificate:
-   - Generate an APNs certificate in your Apple Developer account
-   - Go to Settings > Chatbox Settings > Push Notifications in Crisp Dashboard
-   - Enable iOS push notifications
-   - Upload your APNs certificate (.p8 file)
+
+- Generate an APNs certificate in your Apple Developer account
+- Go to Settings > Chatbox Settings > Push Notifications in Crisp Dashboard
+- Enable iOS push notifications
+- Upload your APNs certificate (.p8 file)
 
 The full procedure is detailed on the [Crisp Developer Hub](https://docs.crisp.chat/guides/chatbox-sdks/ios-sdk/#5-implement-push-notifications-optional)
 
