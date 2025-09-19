@@ -20,5 +20,6 @@ RCT_EXTERN_METHOD(resetSession)
 RCT_EXTERN_METHOD(show)
 RCT_EXTERN_METHOD(searchHelpdesk)
 RCT_EXTERN_METHOD(openHelpdeskArticle:(NSString *)id locale:(NSString *)locale title:(NSString *)title category:(NSString *)category)
+RCT_EXTERN_METHOD(runBotScenario:(NSString *)id)
 
 @end
