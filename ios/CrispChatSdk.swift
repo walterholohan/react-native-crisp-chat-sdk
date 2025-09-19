@@ -139,6 +139,11 @@ class CrispChatSdk: NSObject {
     func openHelpdeskArticle(_ id: String, locale: String, title: String?, category: String?) {
         CrispSDK.openHelpdeskArticle(locale: locale, slug: id, title: title, category: category)
     }
+    
+    @objc
+    func runBotScenario(_ id: String) {
+        CrispSDK.runBotScenario(id)
+    }
 
     @objc
     static func requiresMainQueueSetup() -> Bool {

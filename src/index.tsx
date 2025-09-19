@@ -56,6 +56,7 @@ type CrispChatSdkType = {
     title?: string,
     category?: string
   ): () => void;
+  runBotScenario(scenarioId: string): () => void;
 };
 
 const CrispChatSdk = NativeModules.CrispChatSdk as CrispChatSdkType;
@@ -155,4 +156,8 @@ export const openHelpdeskArticle = (
 ) => {
   CrispChatSdk.openHelpdeskArticle(id, locale, title, category);
   CrispChatSdk.show(); // Search runs on next open → force opening the chat
+};
+
+export const runBotScenario = (scenarioId: string) => {
+  CrispChatSdk.runBotScenario(scenarioId);
 };

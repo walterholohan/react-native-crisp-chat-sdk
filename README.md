@@ -317,6 +317,34 @@ For example, with URL: `https://staging.crisp.help/fr/article/test-internal-link
 - Both functions will automatically open the chat UI if it is not already open.
 - `openHelpdeskArticle(id, locale, title?, category?)` expects the article slug as `id` and an IETF language tag for `locale` (e.g. `en`, `fr`).
 
+### Bot Scenarios
+
+Trigger Crisp Bot Scenarios programmatically to automate conversation flows and provide guided experiences.
+
+```js
+import { runBotScenario } from 'react-native-crisp-chat-sdk';
+
+// Trigger a bot scenario by its ID
+runBotScenario('welcome-flow');
+```
+
+#### Finding Scenario IDs
+
+To get the scenario ID for `runBotScenario()`, follow these steps in your Crisp workspace:
+
+1. Go to your Crisp web app (SaaS platform)
+2. Navigate to your workspace
+3. Select "Bot" from the sidebar
+4. Choose "Scenarios" from the bot menu
+5. Click on the scenario you want to trigger
+6. Copy the scenario ID from the URL or scenario settings
+
+#### Notes
+
+- The scenario will be triggered immediately when the function is called
+- Ensure the chat is configured and the user session is active before calling
+- Bot scenarios work best when the chat UI is visible to the user
+
 ## Language management
 
 Explicitly setting alternative languages from React is not currently supported. Nevertheless, the underlying SDK is able
@@ -359,6 +387,7 @@ displayed in english. If `localeIdentifier: fr_FR` appears in your Xcode logs, i
 - `CrispChatSDK.configure('YOUR_WEBSITE_ID')`
 - `CrispChatSDK.searchHelpdesk()`
 - `CrispChatSDK.openHelpdeskArticle(id: string, locale: string, title?: string, category?: string)`
+- `CrispChatSDK.runBotScenario(scenarioId: string)`
 
 ## Contributing
 

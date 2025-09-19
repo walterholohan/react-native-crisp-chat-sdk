@@ -179,4 +179,9 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
         val context = reactApplicationContext
         Crisp.openHelpdeskArticle(context, id, locale, title, category)
     }
+
+    @ReactMethod
+    fun runBotScenario(scenarioId: String) {
+        Crisp.runBotScenario(scenarioId)
+    }
 }
