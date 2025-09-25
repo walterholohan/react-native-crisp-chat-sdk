@@ -176,7 +176,7 @@ class CrispChatSdk: NSObject {
     
     @objc
     func runBotScenario(_ id: String) {
-        CrispSDK.runBotScenario(id)
+        CrispSDK.session.runBotScenario(id: id)
     }
 
     @objc
