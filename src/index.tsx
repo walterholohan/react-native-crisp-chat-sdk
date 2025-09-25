@@ -46,6 +46,9 @@ type CrispChatSdkType = {
   setSessionInt(key: string, value: number): () => void;
   getSessionIdentifier(): Promise<string | null>;
   pushSessionEvent(name: string, color: CrispSessionEventColors): () => void;
+  pushSessionEvents(
+    events: { name: string; color: CrispSessionEventColors }[]
+  ): () => void;
   resetSession(): () => void;
   show(): () => void;
   configure(websiteId: string): () => void;
@@ -135,6 +138,12 @@ export const pushSessionEvent = (
   CrispChatSdk.pushSessionEvent(String(name), color);
 };
 
+export const pushSessionEvents = (
+  events: { name: string; color: CrispSessionEventColors }[]
+) => {
+  CrispChatSdk.pushSessionEvents(events);
+};
+
 export const resetSession = () => {
   CrispChatSdk.resetSession();
 };
@@ -145,7 +154,7 @@ export const show = () => {
 
 export const searchHelpdesk = () => {
   CrispChatSdk.searchHelpdesk();
-  CrispChatSdk.show(); // Search runs on next open → force opening the chat
+  CrispChatSdk.show();
 };
 
 export const openHelpdeskArticle = (
@@ -155,7 +164,7 @@ export const openHelpdeskArticle = (
   category?: string
 ) => {
   CrispChatSdk.openHelpdeskArticle(id, locale, title, category);
-  CrispChatSdk.show(); // Search runs on next open → force opening the chat
+  CrispChatSdk.show();
 };
 
 export const runBotScenario = (scenarioId: string) => {

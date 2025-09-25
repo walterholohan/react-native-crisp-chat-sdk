@@ -155,6 +155,33 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
     }
 
     @ReactMethod
+    fun pushSessionEvents(events: ReadableArray){
+        val eventsList = mutableListOf<SessionEvent>()
+        
+        for (i in 0 until events.size()) {
+            val event = events.getMap(i)
+            val name = event?.getString("name") ?: ""
+            val color = event?.getInt("color") ?: 9
+            var sessionEventColor: Color = Color.BLACK
+            when(color){
+                0->sessionEventColor= Color.RED
+                1->sessionEventColor= Color.ORANGE
+                2->sessionEventColor= Color.YELLOW
+                3->sessionEventColor= Color.GREEN
+                4->sessionEventColor= Color.BLUE
+                5->sessionEventColor= Color.PURPLE
+                6->sessionEventColor= Color.PINK
+                7->sessionEventColor= Color.BROWN
+                8->sessionEventColor= Color.GREY
+                9->sessionEventColor= Color.BLACK
+            }
+            eventsList.add(SessionEvent(name, sessionEventColor))
+        }
+        Crisp.pushSessionEvents(eventsList)
+    }
+
+
+    @ReactMethod
     fun resetSession() {
         val context = reactApplicationContext
         Crisp.resetChatSession(context)
