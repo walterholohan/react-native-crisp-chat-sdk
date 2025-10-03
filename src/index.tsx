@@ -1,72 +1,15 @@
 import * as React from 'react';
-import { NativeModules, View } from 'react-native';
+import { View } from 'react-native';
+import NativeCrispModule, {
+  Company,
+  CrispSessionEventColors,
+  Employment,
+  Geolocation,
+} from './NativeCrispModule';
 
-export enum CrispSessionEventColors {
-  RED = 0,
-  ORANGE = 1,
-  YELLOW = 2,
-  GREEN = 3,
-  BLUE = 4,
-  PURPLE = 5,
-  PINK = 6,
-  BROWN = 7,
-  GREY = 8,
-  BLACK = 9,
-}
-
-export interface Employment {
-  title?: string;
-  role?: string;
-}
-
-export interface Geolocation {
-  country?: string;
-  city?: string;
-}
-
-export interface Company {
-  name: string;
-  url?: string;
-  companyDescription?: string;
-  employment?: Employment;
-  geolocation?: Geolocation;
-}
-
-type CrispChatSdkType = {
-  setTokenId(tokenId: string | null): () => void;
-  setUserEmail(email: string, signature: string | null): () => void;
-  setUserNickname(name: string): () => void;
-  setUserPhone(phone: string): () => void;
-  setUserCompany(company: Company): () => void;
-  setUserAvatar(url: string): () => void;
-  setSessionSegment(segment: string): () => void;
-  setSessionSegments(segments: string[], overwrite?: boolean): () => void;
-  setSessionString(key: string, value: string): () => void;
-  setSessionBool(key: string, value: boolean): () => void;
-  setSessionInt(key: string, value: number): () => void;
-  getSessionIdentifier(): Promise<string | null>;
-  pushSessionEvent(name: string, color: CrispSessionEventColors): () => void;
-  pushSessionEvents(
-    events: { name: string; color: CrispSessionEventColors }[]
-  ): () => void;
-  resetSession(): () => void;
-  show(): () => void;
-  configure(websiteId: string): () => void;
-  searchHelpdesk(): () => void;
-  openHelpdeskArticle(
-    id: string,
-    locale: string,
-    title?: string,
-    category?: string
-  ): () => void;
-  runBotScenario(scenarioId: string): () => void;
-};
-
-const CrispChatSdk = NativeModules.CrispChatSdk as CrispChatSdkType;
-
-const CrispChat: React.FC = () => {
+const CrispChat = () => {
   React.useEffect(() => {
-    CrispChatSdk.show();
+    NativeCrispModule.show();
   }, []);
 
   return <View />;
@@ -75,56 +18,56 @@ const CrispChat: React.FC = () => {
 export default CrispChat;
 
 export const configure = (websiteId: string) => {
-  CrispChatSdk.configure(String(websiteId));
+  NativeCrispModule?.configure(websiteId);
 };
 
 export const setTokenId = (tokenId: string | null) => {
-  CrispChatSdk.setTokenId(tokenId);
+  NativeCrispModule?.setTokenId(tokenId);
 };
 
 export const setUserEmail = (email: string, signature: string | null) => {
-  CrispChatSdk.setUserEmail(String(email), signature);
+  NativeCrispModule?.setUserEmail(email, signature);
 };
 
 export const setUserNickname = (name: string) => {
-  CrispChatSdk.setUserNickname(String(name));
+  NativeCrispModule?.setUserNickname(name);
 };
 
 export const setUserPhone = (phone: string) => {
-  CrispChatSdk.setUserPhone(String(phone));
+  NativeCrispModule?.setUserPhone(phone);
 };
 
 export const setUserCompany = (company: Company) => {
-  CrispChatSdk.setUserCompany(company);
+  NativeCrispModule?.setUserCompany(company);
 };
 
 export const setUserAvatar = (url: string) => {
-  CrispChatSdk.setUserAvatar(String(url));
+  NativeCrispModule?.setUserAvatar(url);
 };
 
 export const setSessionSegment = (segment: string) => {
-  CrispChatSdk.setSessionSegment(String(segment));
+  NativeCrispModule?.setSessionSegment(segment);
 };
 
 export const setSessionSegments = (segments: string[], overwrite?: boolean) => {
-  CrispChatSdk.setSessionSegments(segments, overwrite ?? false);
+  NativeCrispModule?.setSessionSegments(segments, overwrite ?? false);
 };
 
 export const setSessionString = (key: string, value: string) => {
-  CrispChatSdk.setSessionString(String(key), String(value));
+  NativeCrispModule?.setSessionString(key, value);
 };
 
 export const setSessionBool = (key: string, value: boolean) => {
-  CrispChatSdk.setSessionBool(String(key), Boolean(value));
+  NativeCrispModule?.setSessionBool(key, value);
 };
 
 export const setSessionInt = (key: string, value: number) => {
-  CrispChatSdk.setSessionInt(String(key), Number(value));
+  NativeCrispModule?.setSessionInt(key, value);
 };
 
 export async function getSessionIdentifier() {
   try {
-    const sessionIdentifier = await CrispChatSdk.getSessionIdentifier();
+    const sessionIdentifier = await NativeCrispModule?.getSessionIdentifier();
     return sessionIdentifier;
   } catch (e) {
     throw e;
@@ -135,38 +78,41 @@ export const pushSessionEvent = (
   name: string,
   color: CrispSessionEventColors
 ) => {
-  CrispChatSdk.pushSessionEvent(String(name), color);
+  NativeCrispModule?.pushSessionEvent(name, color);
 };
 
 export const pushSessionEvents = (
   events: { name: string; color: CrispSessionEventColors }[]
 ) => {
-  CrispChatSdk.pushSessionEvents(events);
+  NativeCrispModule?.pushSessionEvents(events);
 };
 
 export const resetSession = () => {
-  CrispChatSdk.resetSession();
+  NativeCrispModule?.resetSession();
 };
 
 export const show = () => {
-  CrispChatSdk.show();
+  NativeCrispModule?.show();
 };
 
 export const searchHelpdesk = () => {
-  CrispChatSdk.searchHelpdesk();
-  CrispChatSdk.show();
+  NativeCrispModule?.searchHelpdesk();
+  NativeCrispModule?.show();
 };
 
 export const openHelpdeskArticle = (
   id: string,
   locale: string,
-  title?: string,
-  category?: string
+  title: string | null,
+  category: string | null
 ) => {
-  CrispChatSdk.openHelpdeskArticle(id, locale, title, category);
-  CrispChatSdk.show();
+  NativeCrispModule?.openHelpdeskArticle(id, locale, title, category);
+  NativeCrispModule?.show();
 };
 
 export const runBotScenario = (scenarioId: string) => {
-  CrispChatSdk.runBotScenario(scenarioId);
+  NativeCrispModule?.runBotScenario(scenarioId);
 };
+
+export type { Company, Geolocation, Employment };
+export { CrispSessionEventColors };
