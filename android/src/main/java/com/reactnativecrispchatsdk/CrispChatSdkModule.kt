@@ -12,12 +12,7 @@ import im.crisp.client.external.Crisp
 import im.crisp.client.external.data.SessionEvent
 import im.crisp.client.external.data.SessionEvent.Color
 
-import im.crisp.client.external.data.Company
-import im.crisp.client.external.data.Employment
-import im.crisp.client.external.data.Geolocation
-import java.net.URL
-
-class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+import com.reactnativecrispchatsdk.parsers.CompanyParser
 
 @ReactModule(name = CrispChatSdkModule.NAME)
 class CrispChatSdkModule(reactContext: ReactApplicationContext) : NativeCrispModuleSpec(reactContext) {
@@ -46,40 +41,8 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : NativeCrispMod
         Crisp.setUserPhone(phone)
     }
 
-    @ReactMethod
-    fun setUserCompany(companyMap: ReadableMap) {
-        val companyName = companyMap.getString("name")
-
-        var companyUrl: URL? = null
-        if (companyMap.hasKey("url") && !companyMap.isNull("url")) {
-            val urlString = companyMap.getString("url")
-            if (urlString != null && urlString.isNotEmpty()) {
-                companyUrl = URL(urlString)
-            }
-        }
-
-        val companyDescription = if (companyMap.hasKey("companyDescription")) {
-            companyMap.getString("companyDescription")
-        } else null
-
-        var employment: Employment? = null
-        if (companyMap.hasKey("employment") && !companyMap.isNull("employment")) {
-            val employmentMap = companyMap.getMap("employment")
-            val title = employmentMap?.getString("title")
-            val role = employmentMap?.getString("role")
-            employment = Employment(title, role)
-        }
-
-        var geolocation: Geolocation? = null
-        if (companyMap.hasKey("geolocation") && !companyMap.isNull("geolocation")) {
-            val geoMap = companyMap.getMap("geolocation")
-            val city = geoMap?.getString("city")
-            val country = geoMap?.getString("country")
-            geolocation = Geolocation(city, country)
-        }
-
-        val company = Company(companyName, companyUrl, companyDescription, employment, geolocation)
-
+    override fun setUserCompany(companyMap: ReadableMap) {
+        val company = CompanyParser.fromReadableMap(companyMap)
         Crisp.setUserCompany(company)
     }
 
