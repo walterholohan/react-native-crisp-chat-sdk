@@ -108,9 +108,43 @@ class CrispChatSdk: NSObject {
     }
 
     @objc
-    func pushSessionEvent(_ eventName: String, color: Crisp.SessionEventColor) {
-        CrispSDK.session.pushEvent(Crisp.SessionEvent(name: eventName, color: color))
+    func pushSessionEvent(_ eventName: String, color: NSInteger) {
+        let sessionEventColor = convertIntegerToColor(color)
+        CrispSDK.session.pushEvent(Crisp.SessionEvent(name: eventName, color: sessionEventColor))
     }
+
+    @objc
+    func pushSessionEvents(_ events: NSArray) {
+        var sessionEvents: [Crisp.SessionEvent] = []
+
+        for event in events {
+            if let eventDict = event as? [String: Any],
+               let name = eventDict["name"] as? String,
+               let colorInt = eventDict["color"] as? NSInteger {
+                let sessionEventColor = convertIntegerToColor(colorInt)
+                sessionEvents.append(Crisp.SessionEvent(name: name, color: sessionEventColor))
+            }
+        }
+
+        CrispSDK.session.pushEvents(sessionEvents)
+    }
+
+    private func convertIntegerToColor(_ colorInt: NSInteger) -> Crisp.SessionEventColor {
+        switch colorInt {
+        case 0: return .red
+        case 1: return .orange
+        case 2: return .yellow
+        case 3: return .green
+        case 4: return .blue
+        case 5: return .purple
+        case 6: return .pink
+        case 7: return .brown
+        case 8: return .grey
+        case 9: return .black
+        default: return .black
+        }
+    }
+
 
     @objc
     func resetSession() {
@@ -142,7 +176,7 @@ class CrispChatSdk: NSObject {
     
     @objc
     func runBotScenario(_ id: String) {
-        CrispSDK.runBotScenario(id)
+        CrispSDK.session.runBotScenario(id: id)
     }
 
     @objc
