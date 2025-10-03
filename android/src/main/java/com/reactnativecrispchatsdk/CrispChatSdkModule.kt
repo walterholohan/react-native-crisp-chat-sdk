@@ -1,16 +1,17 @@
 package com.reactnativecrispchatsdk
 
 import android.content.Intent
-import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.bridge.Promise
+import com.facebook.react.module.annotations.ReactModule
+
 import im.crisp.client.external.ChatActivity
 import im.crisp.client.external.Crisp
 import im.crisp.client.external.data.SessionEvent
 import im.crisp.client.external.data.SessionEvent.Color
+
 import im.crisp.client.external.data.Company
 import im.crisp.client.external.data.Employment
 import im.crisp.client.external.data.Geolocation
@@ -18,34 +19,30 @@ import java.net.URL
 
 class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
-    override fun getName(): String {
-        return "CrispChatSdk"
-    }
+@ReactModule(name = CrispChatSdkModule.NAME)
+class CrispChatSdkModule(reactContext: ReactApplicationContext) : NativeCrispModuleSpec(reactContext) {
 
-    @ReactMethod
-    fun configure(websiteId: String) {
+    override fun getName() = NAME
+
+    override fun configure(websiteId: String) {
         val context = reactApplicationContext
         Crisp.configure(context, websiteId)
     }
 
-    @ReactMethod
-    fun setTokenId(tokenId: String?){
+    override fun setTokenId(tokenId: String?){
         val context = reactApplicationContext
         Crisp.setTokenID(context, tokenId)
     }
 
-    @ReactMethod
-    fun setUserEmail(email: String, signature: String?) {
+    override fun setUserEmail(email: String, signature: String?) {
         Crisp.setUserEmail(email, signature)
     }
 
-    @ReactMethod
-    fun setUserNickname(name: String) {
+    override fun setUserNickname(name: String) {
         Crisp.setUserNickname(name)
     }
 
-    @ReactMethod
-    fun setUserPhone(phone: String){
+    override fun setUserPhone(phone: String){
         Crisp.setUserPhone(phone)
     }
 
@@ -86,18 +83,15 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
         Crisp.setUserCompany(company)
     }
 
-    @ReactMethod
-    fun setUserAvatar(url: String){
+    override fun setUserAvatar(url: String){
         Crisp.setUserAvatar(url)
     }
 
-    @ReactMethod
-    fun setSessionSegment(segment: String){
+    override fun setSessionSegment(segment: String){
         Crisp.setSessionSegment(segment)
     }
 
-    @ReactMethod
-    fun setSessionSegments(segments: ReadableArray, overwrite: Boolean){
+    override fun setSessionSegments(segments: ReadableArray, overwrite: Boolean){
         val segmentsList = mutableListOf<String>()
         for (i in 0 until segments.size()) {
             segmentsList.add(segments.getString(i) ?: "")
@@ -105,37 +99,28 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
         Crisp.setSessionSegments(segmentsList, overwrite)
     }
 
-    @ReactMethod
-    fun setSessionString(key: String, value: String){
+    override fun setSessionString(key: String, value: String){
         Crisp.setSessionString(key, value)
     }
 
-    @ReactMethod
-    fun setSessionBool(key: String, value: Boolean){
+    override fun setSessionBool(key: String, value: Boolean){
         Crisp.setSessionBool(key, value)
     }
 
-    @ReactMethod
-    fun setSessionInt(key: String, value: Int){
-        Crisp.setSessionInt(key, value)
+    override fun setSessionInt(key: String, value: Double){
+        Crisp.setSessionInt(key, value.toInt())
     }
 
-    @ReactMethod
-    fun getSessionIdentifier(promise: Promise){
-        try {
-            val context = reactApplicationContext
-            val identifier = Crisp.getSessionIdentifier(context)
-            promise.resolve(identifier)
-        } catch (e: Throwable) {
-            promise.reject("Create Event Error", e)
-        }
+    override fun getSessionIdentifier(promise: Promise) {
+        val context = reactApplicationContext
+        val identifier = Crisp.getSessionIdentifier(context)
+        promise.resolve(identifier)
     }
 
-    @ReactMethod
-    fun pushSessionEvent(name: String, color: Int){
+    override fun pushSessionEvent(name: String, color: Double){
       var sessionEventColor: Color = Color.BLACK
 
-      when(color){
+      when(color.toInt()){
         0->sessionEventColor= Color.RED
         1->sessionEventColor= Color.ORANGE
         2->sessionEventColor= Color.YELLOW
@@ -187,28 +172,28 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : ReactContextBa
         Crisp.resetChatSession(context)
     }
 
-    @ReactMethod
-    fun show() {
+    override fun show() {
         val context = reactApplicationContext
         val crispIntent = Intent(context, ChatActivity::class.java)
         crispIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(crispIntent)
     }
 
-     @ReactMethod
-    fun searchHelpdesk() {
+    override fun searchHelpdesk() {
         val context = reactApplicationContext
         Crisp.searchHelpdesk(context)
     }
 
-    @ReactMethod
-    fun openHelpdeskArticle(id: String, locale: String, title: String?, category: String?) {
+    override fun openHelpdeskArticle(id: String, locale: String, title: String?, category: String?) {
         val context = reactApplicationContext
         Crisp.openHelpdeskArticle(context, id, locale, title, category)
     }
 
-    @ReactMethod
-    fun runBotScenario(scenarioId: String) {
+    override fun runBotScenario(scenarioId: String) {
         Crisp.runBotScenario(scenarioId)
+    }
+
+    companion object {
+        const val NAME = "NativeCrispModule"
     }
 }
