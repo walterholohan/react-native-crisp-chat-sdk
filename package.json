@@ -60,6 +60,7 @@
     "@react-native/metro-config": "0.74.86",
     "@release-it/conventional-changelog": "^10.0.1",
     "@types/jest": "^26.0.0",
+    "@types/react": "19.1.0",
     "auto-changelog": "^2.2.0",
     "commitlint": "^19.8.1",
     "eslint": "^8.19.0",
@@ -71,18 +72,17 @@
     "metro-react-native-babel-preset": "^0.77.0",
     "pod-install": "^0.1.0",
     "prettier": "3.2.5",
+    "react": "19.1.0",
+    "react-native": "0.81.4",
     "react-native-builder-bob": "^0.23.2",
     "release-it": "^19.0.4",
-    "typescript": "5.0.4",
-    "react-native": "0.79.5",
-    "react": "19.0.0",
-    "@types/react": "19.0.10"
+    "typescript": "^5.8.3"
   },
   "peerDependencies": {
     "@expo/config-plugins": "*",
+    "@types/react": "*",
     "expo": "*",
     "react": "*",
-    "@types/react": "*",
     "react-native": "*"
   },
   "jest": {
@@ -169,5 +169,13 @@
         }
       ]
     ]
+  },
+  "codegenConfig": {
+    "name": "NativeCrispModuleSpec",
+    "type": "modules",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "com.reactnativecrispchatsdk"
+    }
   }
 }
