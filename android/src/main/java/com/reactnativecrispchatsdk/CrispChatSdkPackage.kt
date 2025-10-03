@@ -1,19 +1,33 @@
 package com.reactnativecrispchatsdk
 
-import java.util.Arrays
-
-import com.facebook.react.ReactPackage
+import com.facebook.react.BaseReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.uimanager.ViewManager
-import com.facebook.react.bridge.JavaScriptModule
+import com.facebook.react.module.model.ReactModuleInfo
+import com.facebook.react.module.model.ReactModuleInfoProvider
+import java.util.HashMap
 
-class CrispChatSdkPackage : ReactPackage {
-    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-      return Arrays.asList<NativeModule>(CrispChatSdkModule(reactContext))
+class CrispChatSdkPackage : BaseReactPackage() {
+  override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
+    return if (name == CrispChatSdkModule.NAME) {
+      CrispChatSdkModule(reactContext)
+    } else {
+      null
     }
+  }
 
-    override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-      return emptyList<ViewManager<*, *>>()
+  override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
+    return ReactModuleInfoProvider {
+      val moduleInfos: MutableMap<String, ReactModuleInfo> = HashMap()
+      moduleInfos[CrispChatSdkModule.NAME] = ReactModuleInfo(
+        CrispChatSdkModule.NAME,
+        CrispChatSdkModule.NAME,
+        false,  // canOverrideExistingModule
+        false,  // needsEagerInit
+        false,  // isCxxModule
+        true // isTurboModule
+      )
+      moduleInfos
     }
+  }
 }
