@@ -48,7 +48,7 @@ export interface Spec extends TurboModule {
   pushSessionEvent(name: string, color: CrispSessionEventColors): void;
   pushSessionEvents(
     events: { name: string; color: CrispSessionEventColors }[]
-  ): () => void;
+  ): void;
   resetSession(): void;
   show(): void;
   configure(websiteId: string): void;
