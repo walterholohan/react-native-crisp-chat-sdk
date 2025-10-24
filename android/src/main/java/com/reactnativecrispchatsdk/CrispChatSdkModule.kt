@@ -102,8 +102,7 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : NativeCrispMod
       ))
     }
 
-    @ReactMethod
-    fun pushSessionEvents(events: ReadableArray){
+    override fun pushSessionEvents(events: ReadableArray){
         val eventsList = mutableListOf<SessionEvent>()
         
         for (i in 0 until events.size()) {
@@ -129,8 +128,7 @@ class CrispChatSdkModule(reactContext: ReactApplicationContext) : NativeCrispMod
     }
 
 
-    @ReactMethod
-    fun resetSession() {
+    override fun resetSession() {
         val context = reactApplicationContext
         Crisp.resetChatSession(context)
     }
