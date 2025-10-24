@@ -4,19 +4,19 @@
 #import <React/RCTUtils.h>
 
 #ifdef RCT_NEW_ARCH_ENABLED
- #import <NativeCrispModuleSpec/NativeCrispModuleSpec.h>
+#import <NativeCrispModuleSpec/NativeCrispModuleSpec.h>
   @interface NativeCrispModule () <NativeCrispModuleSpec>
   @end
 #else
   @interface NativeCrispModule () <RCTBridgeModule>
   @end
 #endif
-
 @implementation NativeCrispModule
 
 #ifndef RCT_NEW_ARCH_ENABLED
 RCT_EXPORT_MODULE(NativeCrispModule)
 #endif
+
 
 - (void)configure:(NSString *)websiteId {
     [[NativeCrispModuleSwift shared] configure:websiteId];
@@ -40,11 +40,11 @@ RCT_EXPORT_MODULE(NativeCrispModule)
 
 #ifdef RCT_NEW_ARCH_ENABLED
 - (void)setUserCompany:(JS::NativeCrispModule::Company &)company {
-    NSMutableDictionary *companyDict = [@{
-        @"name": company.name()
-    } mutableCopy];
 
-    // Add optional fields
+    NSMutableDictionary *companyDict = [NSMutableDictionary dictionary];
+
+    companyDict[@"name"] = company.name();
+
     if (company.url()) {
         companyDict[@"url"] = company.url();
     }
@@ -52,22 +52,24 @@ RCT_EXPORT_MODULE(NativeCrispModule)
         companyDict[@"companyDescription"] = company.companyDescription();
     }
 
-    // Add employment if present
     if (company.employment().has_value()) {
         auto emp = company.employment().value();
         NSMutableDictionary *empDict = [NSMutableDictionary dictionary];
         if (emp.title()) empDict[@"title"] = emp.title();
         if (emp.role()) empDict[@"role"] = emp.role();
-        companyDict[@"employment"] = empDict;
+        if (empDict.count > 0) {
+            companyDict[@"employment"] = empDict;
+        }
     }
 
-    // Add geolocation if present
     if (company.geolocation().has_value()) {
         auto geo = company.geolocation().value();
         NSMutableDictionary *geoDict = [NSMutableDictionary dictionary];
         if (geo.country()) geoDict[@"country"] = geo.country();
         if (geo.city()) geoDict[@"city"] = geo.city();
-        companyDict[@"geolocation"] = geoDict;
+        if (geoDict.count > 0) {
+            companyDict[@"geolocation"] = geoDict;
+        }
     }
 
     [[NativeCrispModuleSwift shared] setUserCompany:companyDict];
@@ -138,6 +140,9 @@ RCT_EXPORT_MODULE(NativeCrispModule)
     [[NativeCrispModuleSwift shared] runBotScenario:scenarioId];
 }
 
++ (NSString *)moduleName {
+    return @"NativeCrispModule";
+}
 
 #ifdef RCT_NEW_ARCH_ENABLED
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
@@ -146,9 +151,5 @@ RCT_EXPORT_MODULE(NativeCrispModule)
     return std::make_shared<facebook::react::NativeCrispModuleSpecJSI>(params);
 }
 #endif
-
-+ (NSString *)moduleName {
-  return @"NativeCrispModule";
-}
 
 @end
