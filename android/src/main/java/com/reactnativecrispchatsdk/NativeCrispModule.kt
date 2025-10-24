@@ -14,8 +14,8 @@ import im.crisp.client.external.data.SessionEvent.Color
 
 import com.reactnativecrispchatsdk.parsers.CompanyParser
 
-@ReactModule(name = CrispChatSdkModule.NAME)
-class CrispChatSdkModule(reactContext: ReactApplicationContext) : NativeCrispModuleSpec(reactContext) {
+@ReactModule(name = NativeCrispModule.NAME)
+class NativeCrispModule(reactContext: ReactApplicationContext) : NativeCrispModuleSpec(reactContext) {
 
     override fun getName() = NAME
 

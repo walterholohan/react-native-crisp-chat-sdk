@@ -7,10 +7,10 @@ import com.facebook.react.module.model.ReactModuleInfo
 import com.facebook.react.module.model.ReactModuleInfoProvider
 import java.util.HashMap
 
-class CrispChatSdkPackage : BaseReactPackage() {
+class NativeCrispPackage : BaseReactPackage() {
   override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
-    return if (name == CrispChatSdkModule.NAME) {
-      CrispChatSdkModule(reactContext)
+    return if (name == NativeCrispModule.NAME) {
+      NativeCrispModule(reactContext)
     } else {
       null
     }
@@ -19,9 +19,9 @@ class CrispChatSdkPackage : BaseReactPackage() {
   override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
     return ReactModuleInfoProvider {
       val moduleInfos: MutableMap<String, ReactModuleInfo> = HashMap()
-      moduleInfos[CrispChatSdkModule.NAME] = ReactModuleInfo(
-        CrispChatSdkModule.NAME,
-        CrispChatSdkModule.NAME,
+      moduleInfos[NativeCrispModule.NAME] = ReactModuleInfo(
+        NativeCrispModule.NAME,
+        NativeCrispModule.NAME,
         false,  // canOverrideExistingModule
         false,  // needsEagerInit
         false,  // isCxxModule
