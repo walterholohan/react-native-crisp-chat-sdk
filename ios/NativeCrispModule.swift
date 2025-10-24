@@ -132,7 +132,15 @@ public class NativeCrispModuleSwift: NSObject {
             var viewController = RCTPresentedViewController()
 
             if viewController == nil {
-                viewController = UIApplication.shared.windows.first?.rootViewController
+                if #available(iOS 15.0, *) {
+                    viewController = UIApplication.shared.connectedScenes
+                        .compactMap { $0 as? UIWindowScene }
+                        .flatMap { $0.windows }
+                        .first { $0.isKeyWindow }?
+                        .rootViewController
+                } else {
+                    viewController = UIApplication.shared.windows.first?.rootViewController
+                }
             }
 
             viewController?.present(ChatViewController(), animated: true)
