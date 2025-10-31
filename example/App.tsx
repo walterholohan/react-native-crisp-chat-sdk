@@ -72,7 +72,10 @@ export default function App() {
       <TouchableOpacity onPress={() => searchHelpdesk()}>
         <Text>Search Helpdesk</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => openHelpdeskArticle('abdcfe', 'fr')}>
+      <TouchableOpacity
+        onPress={() =>
+          openHelpdeskArticle('abdcfe', 'fr', 'Article Title', 'Category')
+        }>
         <Text>Open Helpdesk Article</Text>
       </TouchableOpacity>
     </View>
