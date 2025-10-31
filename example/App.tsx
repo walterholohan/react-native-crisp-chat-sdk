@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import CrispChat, {
+import {
+  show,
   CrispSessionEventColors,
   pushSessionEvent,
   resetSession,
@@ -21,16 +22,10 @@ import CrispChat, {
 configure('-JzqEmX56venQuQw4YV8');
 
 export default function App() {
-  const [showChat, setShowChat] = React.useState<boolean>(false);
-
-  const onShowChat = () => {
-    setShowChat(!showChat);
-  };
-
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onShowChat}>
-        <Text>{showChat ? 'Hide' : 'Show'} Chat</Text>
+      <TouchableOpacity onPress={show}>
+        <Text>Show Chat</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => setTokenId('123456789')}>
         <Text>Set Token Id</Text>
@@ -80,7 +75,6 @@ export default function App() {
       <TouchableOpacity onPress={() => openHelpdeskArticle('abdcfe', 'fr')}>
         <Text>Open Helpdesk Article</Text>
       </TouchableOpacity>
-      {showChat && <CrispChat />}
     </View>
   );
 }

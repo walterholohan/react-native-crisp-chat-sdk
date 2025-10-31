@@ -13,7 +13,7 @@ React-Native bridge for Crisp chat iOS and Android SDK&#39;s
 
 ## Installation
 
-Install the library using either yarn or npm like so:
+Install the library using either yarn or npm:
 
 ```sh
 yarn add react-native-crisp-chat-sdk
@@ -23,28 +23,29 @@ yarn add react-native-crisp-chat-sdk
 npm install --save react-native-crisp-chat-sdk
 ```
 
-## Expo support
+### Expo Workflow
 
-This package supports Expo, however, since it's a wrapper on Crisp iOS and Android packages which are native libraries, it is not available in the [Expo Go](https://expo.io/client) app. Using Crisp with Expo is [explained here](/plugin/install.md).
+This package supports Expo with a custom dev client. Since it wraps native iOS and Android SDKs, it is not available in Expo Go.
 
-### iOS Installation
+For detailed setup instructions, see the [Expo installation guide](/plugin/install.md).
 
-Installing Crisp Native SDK is mandatory:
+### React Native (Bare Workflow)
+
+#### Android
+
+```sh
+npm run android
+```
+
+#### iOS
 
 ```sh
 cd ios && pod install
 ```
 
-### iOS
-
-#### Update your Info.plist
-
-To enable your users to take and upload photos to the chat as well as download photos to their photo library, add the
-`Privacy - Camera Usage Description` ([NSCameraUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nscamerausagedescription)) and `Privacy - Photo Library Additions Usage Description` ([NSPhotoLibraryAddUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsphotolibraryaddusagedescription)) to your app's Info.plist.
-
-## Requirements
-
-⚠️ Adding Camera and Photo permissions is mandatory, `NSCameraUsageDescription` and `NSPhotoLibraryUsageDescription` in `Info.plist`, to inform your users that you need to access to the Camera and Photo Library. You also have to enable **"iCloud Documents"** capability
+```sh
+npm run ios
+```
 
 ## Get your website ID
 
@@ -317,87 +318,6 @@ For example, with URL: `https://staging.crisp.help/fr/article/test-internal-link
 - Both functions will automatically open the chat UI if it is not already open.
 - `openHelpdeskArticle(id, locale, title?, category?)` expects the article slug as `id` and an IETF language tag for `locale` (e.g. `en`, `fr`).
 
-### Session Events
-
-Track user activities and milestones by pushing session events to Crisp. These events appear in the conversation timeline and help agents understand user behavior.
-
-```js
-import {
-  pushSessionEvent,
-  pushSessionEvents,
-  CrispSessionEventColors
-} from 'react-native-crisp-chat-sdk';
-
-// Push a single session event
-pushSessionEvent('User Signup', CrispSessionEventColors.GREEN);
-pushSessionEvent('Purchase Completed', CrispSessionEventColors.BLUE);
-pushSessionEvent('Error Encountered', CrispSessionEventColors.RED);
-
-// Push multiple session events at once
-pushSessionEvents([
-  { name: 'Profile Updated', color: CrispSessionEventColors.BLUE },
-  { name: 'Premium Upgraded', color: CrispSessionEventColors.GREEN },
-  { name: 'Tutorial Completed', color: CrispSessionEventColors.YELLOW }
-]);
-```
-
-#### Available Event Colors
-
-The `CrispSessionEventColors` enum provides the following color options:
-
-```js
-CrispSessionEventColors.RED      // 0 - Critical events, errors
-CrispSessionEventColors.ORANGE   // 1 - Warnings, important notices
-CrispSessionEventColors.YELLOW   // 2 - Highlights, completions
-CrispSessionEventColors.GREEN    // 3 - Success, positive actions
-CrispSessionEventColors.BLUE     // 4 - Information, updates
-CrispSessionEventColors.PURPLE   // 5 - Premium features, special events
-CrispSessionEventColors.PINK     // 6 - User engagement, social actions
-CrispSessionEventColors.BROWN    // 7 - System events, maintenance
-CrispSessionEventColors.GREY     // 8 - Neutral events, general activity
-CrispSessionEventColors.BLACK    // 9 - Default, miscellaneous
-```
-
-#### Best Practices
-
-**Event Naming:**
-- Use clear, descriptive names that agents can easily understand
-- Follow consistent naming conventions (e.g., "Action Completed" format)
-- Include context when useful (e.g., "Purchase Completed - Premium Plan")
-
-**Color Usage:**
-- GREEN: Successful completions, upgrades, positive milestones
-- BLUE: General information, profile updates, feature usage
-- YELLOW: Achievements, tutorial progress, highlights
-- RED: Errors, failed attempts, critical issues
-- ORANGE: Warnings, approaching limits, important notices
-
-**Performance:**
-- Use `pushSessionEvents()` for multiple events to reduce API calls
-- Consider batching related events that occur around the same time
-- Avoid pushing too many events in rapid succession
-
-**Example Usage Scenarios:**
-
-```js
-// User onboarding flow
-pushSessionEvents([
-  { name: 'App Installed', color: CrispSessionEventColors.BLUE },
-  { name: 'Account Created', color: CrispSessionEventColors.GREEN },
-  { name: 'Profile Setup', color: CrispSessionEventColors.BLUE },
-  { name: 'Tutorial Completed', color: CrispSessionEventColors.YELLOW }
-]);
-
-// E-commerce events
-pushSessionEvent('Product Viewed', CrispSessionEventColors.BLUE);
-pushSessionEvent('Added to Cart', CrispSessionEventColors.YELLOW);
-pushSessionEvent('Purchase Completed', CrispSessionEventColors.GREEN);
-
-// Error tracking
-pushSessionEvent('Payment Failed', CrispSessionEventColors.RED);
-pushSessionEvent('Network Timeout', CrispSessionEventColors.ORANGE);
-```
-
 ### Bot Scenarios
 
 Trigger Crisp Bot Scenarios programmatically to automate conversation flows and provide guided experiences.
@@ -452,7 +372,6 @@ displayed in english. If `localeIdentifier: fr_FR` appears in your Xcode logs, i
 - `CrispChatSDK.show()`
 - `CrispChatSDK.setTokenId('userID/GUID')` - **Must be called before chat is presented**
 - `CrispChatSDK.pushSessionEvent(name: "Signup", color: CrispSessionEventColors.blue)`
-- `CrispChatSDK.pushSessionEvents(events: [{ name: string, color: CrispSessionEventColors }])`
 - `CrispChatSDK.setUserEmail('test@test.com')` - **Identity verification signature is optional**
 - `CrispChatSDK.setUserEmail('test@test.com', 'signature')` - **With identity verification**
 - `CrispChatSDK.setUserNickname('John Doe')`
