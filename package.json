@@ -26,7 +26,7 @@
   "scripts": {
     "example": "yarn workspace react-native-crisp-chat-sdk-example",
     "test": "jest",
-    "typecheck": "tsc",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "test:plugin": "expo-module test plugin",
     "build:plugin": "tsc --build plugin",
@@ -103,7 +103,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint && yarn typescript"
+      "pre-commit": "yarn lint && yarn typecheck"
     }
   },
   "commitlint": {
