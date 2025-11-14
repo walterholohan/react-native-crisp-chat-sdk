@@ -49,6 +49,9 @@ react {
     //
     //   The list of flags to pass to the Hermes compiler. By default is "-O", "-output-source-map"
     // hermesFlags = ["-O", "-output-source-map"]
+
+    /* Autolinking */
+    autolinkLibrariesWithApp()
 }
 
 /**
@@ -67,16 +70,16 @@ def enableProguardInReleaseBuilds = false
  * give correct results when using with locales other than en-US. Note that
  * this variant is about 6MiB larger per architecture than default.
  */
-def jscFlavor = 'org.webkit:android-jsc:+'
+def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
 
 android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.example"
+    namespace "reactnativecrispchatsdk.example"
     defaultConfig {
-        applicationId "com.example"
+        applicationId "reactnativecrispchatsdk.example"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -108,8 +111,6 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
-    implementation project(':reactnativecrispchatsdk')
-
     implementation 'im.crisp:crisp-sdk:2.0.14'
 
     // Fixes multiDex error
@@ -122,4 +123,15 @@ dependencies {
     }
 }
 
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+// Patch autolinking generated file to use correct package name
+tasks.named("generateReactNativeEntryPoint").configure {
+    doLast {
+        def entryPointFile = file("${buildDir}/generated/autolinking/src/main/java/com/facebook/react/ReactNativeApplicationEntryPoint.java")
+        if (entryPointFile.exists()) {
+            def content = entryPointFile.text
+            content = content.replace("com.example.BuildConfig", "reactnativecrispchatsdk.example.BuildConfig")
+            entryPointFile.text = content
+            println "Patched ReactNativeApplicationEntryPoint.java to use correct package name"
+        }
+    }
+}

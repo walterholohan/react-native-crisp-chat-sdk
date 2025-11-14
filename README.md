@@ -20,7 +20,7 @@ yarn add react-native-crisp-chat-sdk
 ```
 
 ```sh
-npm install --save react-native-crisp-chat-sdk
+npm install react-native-crisp-chat-sdk
 ```
 
 ### Expo Workflow
