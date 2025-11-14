@@ -1,5 +1,9 @@
 #import "NativeCrispModule.h"
+#if __has_include(<react_native_crisp_chat_sdk/react_native_crisp_chat_sdk-Swift.h>)
+#import <react_native_crisp_chat_sdk/react_native_crisp_chat_sdk-Swift.h>
+#else
 #import "react_native_crisp_chat_sdk-Swift.h"
+#endif
 #import <React/RCTBridgeModule.h>
 #import <React/RCTUtils.h>
 
