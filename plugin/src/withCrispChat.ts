@@ -20,6 +20,24 @@ const withReactNativeCrisp: ConfigPlugin<{
   expoConfig,
   { websiteId = 'YOUR_WEBSITE_ID', notifications = { enabled: false } } = {}
 ) => {
+  expoConfig = withInfoPlist(expoConfig, (config) => {
+    if (websiteId && websiteId !== 'YOUR_WEBSITE_ID') {
+      config.modResults.CrispWebsiteId = websiteId;
+    }
+
+    if (notifications.enabled) {
+      config.modResults.UIBackgroundModes =
+        config.modResults.UIBackgroundModes || [];
+      if (
+        !config.modResults.UIBackgroundModes.includes('remote-notification')
+      ) {
+        config.modResults.UIBackgroundModes.push('remote-notification');
+      }
+    }
+
+    return config;
+  });
+
   if (notifications.enabled) {
     expoConfig = withAndroidManifest(expoConfig, (config) => {
       config.modResults = setAndroidManifestService(config.modResults);
@@ -30,21 +48,30 @@ const withReactNativeCrisp: ConfigPlugin<{
       config.modResults['aps-environment'] = 'production';
       return config;
     });
-
-    expoConfig = withInfoPlist(expoConfig, (config) => {
-      config.modResults.UIBackgroundModes =
-        config.modResults.UIBackgroundModes || [];
-      if (
-        !config.modResults.UIBackgroundModes.includes('remote-notification')
-      ) {
-        config.modResults.UIBackgroundModes.push('remote-notification');
-      }
-      return config;
-    });
   }
 
   withAppDelegate(expoConfig, (modConfig) => {
-    if (['objc', 'objcpp'].includes(modConfig.modResults.language)) {
+    const language = modConfig.modResults.language;
+
+    if (language === 'swift') {
+      console.log(
+        '[Crisp Plugin] Detected Swift AppDelegate - injecting Swift configuration'
+      );
+      modConfig.modResults.contents = setSwiftAppDelegateImport(
+        modConfig.modResults.contents
+      ).contents;
+
+      modConfig.modResults.contents = setSwiftAppDelegateCall(
+        modConfig.modResults.contents,
+        websiteId,
+        notifications.enabled
+      ).contents;
+    }
+
+    if (['objc', 'objcpp'].includes(language)) {
+      console.log(
+        '[Crisp Plugin] Detected Objective-C AppDelegate - injecting configuration'
+      );
       modConfig.modResults.contents = setAppDelegateImport(
         modConfig.modResults.contents
       ).contents;
@@ -140,6 +167,77 @@ export function setAppDelegateCall(
   return [super application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }`,
         anchor: /@end/,
+        offset: 0,
+        comment: '//',
+      });
+    }
+  }
+
+  return modifiedSrc;
+}
+
+export function setSwiftAppDelegateImport(src: string) {
+  return mergeContents({
+    tag: 'react-native-crisp-chat-sdk-swift',
+    src,
+    newSrc: 'import Crisp',
+    anchor: /import Expo/,
+    offset: 1,
+    comment: '//',
+  });
+}
+
+export function setSwiftAppDelegateCall(
+  src: string,
+  websiteId: string,
+  notificationsEnabled: boolean
+) {
+  let modifiedSrc = mergeContents({
+    tag: 'react-native-crisp-chat-sdk-swift-call',
+    src,
+    newSrc: `// Crisp SDK Configuration
+    CrispSDK.configure(websiteID: "${websiteId}")${
+      notificationsEnabled
+        ? `
+
+    DispatchQueue.main.async {
+      application.registerForRemoteNotifications()
+    }`
+        : ''
+    }`,
+    anchor: /didFinishLaunchingWithOptions/,
+    offset: 4,
+    comment: '//',
+  });
+
+  if (notificationsEnabled) {
+    // Check if the device token method already exists
+    const hasExistingMethod = modifiedSrc.contents.includes(
+      'func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)'
+    );
+
+    if (hasExistingMethod) {
+      // If method exists, insert the code inside it
+      modifiedSrc = mergeContents({
+        tag: 'react-native-crisp-chat-sdk-swift-push',
+        src: modifiedSrc.contents,
+        newSrc: `CrispSDK.setDeviceToken(deviceToken)`,
+        anchor:
+          /func application\(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data\) \{/,
+        offset: 1,
+        comment: '//',
+      });
+    } else {
+      // If method doesn't exist, add the entire method before the closing brace
+      modifiedSrc = mergeContents({
+        tag: 'react-native-crisp-chat-sdk-swift-push-method',
+        src: modifiedSrc.contents,
+        newSrc: `
+  public override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    CrispSDK.setDeviceToken(deviceToken)
+  }
+`,
+        anchor: /^}/,
         offset: 0,
         comment: '//',
       });
