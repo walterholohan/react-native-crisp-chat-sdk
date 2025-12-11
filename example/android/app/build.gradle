@@ -111,7 +111,7 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
-    implementation 'im.crisp:crisp-sdk:2.0.14'
+    implementation 'im.crisp:crisp-sdk:2.0.15'
 
     // Fixes multiDex error
     implementation 'androidx.multidex:multidex:2.0.1'

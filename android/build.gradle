@@ -71,5 +71,5 @@ def kotlin_version = getExtOrDefault("kotlinVersion")
 dependencies {
   implementation 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'im.crisp:crisp-sdk:2.0.14'
+  implementation 'im.crisp:crisp-sdk:2.0.15'
 }
