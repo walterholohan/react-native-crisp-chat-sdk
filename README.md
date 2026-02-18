@@ -2,7 +2,7 @@
 
 > **:warning: This package is deprecated.**
 >
-> Please use the official [`expo-crisp-sdk`](https://github.com/crisp-im/crisp-sdk-react-native) instead.
+> Please use the official [`crisp-sdk-react-native`](https://github.com/crisp-im/crisp-sdk-react-native) instead.
 > See the [Migration Guide](https://github.com/crisp-im/crisp-sdk-react-native/blob/master/MIGRATION.md) for step-by-step instructions to upgrade.
 
 React-Native bridge for Crisp chat iOS and Android SDK&#39;s
