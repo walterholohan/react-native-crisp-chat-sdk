@@ -144,9 +144,6 @@ RCT_EXPORT_MODULE(NativeCrispModule)
     [[NativeCrispModuleSwift shared] runBotScenario:scenarioId];
 }
 
-+ (NSString *)moduleName {
-    return @"NativeCrispModule";
-}
 
 #ifdef RCT_NEW_ARCH_ENABLED
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
